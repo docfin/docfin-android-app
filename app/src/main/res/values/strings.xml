@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Docfin</string>
+    <string name="user.firstName">First Name</string>
+    <string name="user.lastName">Last Name</string>
+    <string name="user.email">Email</string>
+    <string name="user.insurance">Insurance</string>
+
+
+    <string name="user.firstName.error">Please enter the first name</string>
+    <string name="user.lastName.error">Please enter the last name</string>
+    <string name="user.email.error">Please enter the email</string>
+    <string name="user.insurance.error">Please enter the insurance</string>
+    <string name="tag_line">Finding doctors made easy!</string>
+    <string name="registerUser">Save</string>
+    <string name="welcome_msg">Welcome to \nDocfin!</string>
+    <string name="register_msg">Before we get started:</string>
 </resources>

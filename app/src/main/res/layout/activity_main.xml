@@ -12,21 +12,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to \nDocfin!"
-        android:id="@+id/textView"
-        android:layout_marginTop="46dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
-        android:textAlignment="center" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Finding doctors made easy!"
+        android:text="@string/tag_line"
         android:id="@+id/textView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -34,12 +21,23 @@
         android:layout_alignParentStart="true"
         android:textAlignment="center"
         android:textStyle="italic" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/welcome_msg"
+        android:id="@+id/textView"
+        android:layout_marginTop="46dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:textAlignment="center" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Before we get started:"
+        android:text="@string/register_msg"
         android:id="@+id/textView3"
         android:layout_marginTop="42dp"
         android:layout_below="@+id/textView"
@@ -52,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="First Name"
+        android:hint="@string/user.firstName"
         android:ems="10"
         android:id="@+id/firstName"
         android:layout_below="@+id/textView3"
@@ -69,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Last Name"
+        android:hint="@string/user.lastName"
         android:ems="10"
         android:id="@+id/lastName"
         android:layout_below="@+id/firstName"
@@ -87,14 +85,14 @@
         android:layout_below="@+id/lastName"
         android:layout_alignLeft="@+id/lastName"
         android:layout_alignStart="@+id/lastName"
-        android:hint="Email"
+        android:hint="@string/user.email"
         android:layout_alignRight="@+id/lastName"
         android:layout_alignEnd="@+id/lastName" />
 
-    <android.inputmethodservice.ExtractEditText
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Insurance"
+        android:hint="@string/user.insurance"
         android:id="@+id/insuranceId"
         android:layout_below="@+id/emailId"
         android:layout_alignLeft="@+id/emailId"
@@ -103,9 +101,9 @@
         android:layout_alignEnd="@+id/emailId" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/registerUser"
         android:onClick="registerUser"
         android:id="@+id/saveButton"
         android:layout_below="@+id/insuranceId"
