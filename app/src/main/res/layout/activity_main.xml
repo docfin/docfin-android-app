@@ -99,7 +99,8 @@
         android:layout_alignStart="@+id/emailId"
         android:layout_alignRight="@+id/emailId"
         android:layout_alignEnd="@+id/emailId"
-        android:imeOptions="actionDone"/>
+        android:imeOptions="actionNone"
+        android:onClick="selectInsurance"/>
 
     <Button
         android:layout_width="match_parent"
