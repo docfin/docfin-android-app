@@ -13,6 +13,32 @@ public class Insurance {
         providers.add(new Provider("Aetna", new String[]{"Choice PPO", "Choice PPO Plus"}));
         providers.add(new Provider("Cigna", new String[]{"Cigna PPO", "Cigna PPO Plus"}));
         providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
+        providers.add(new Provider("United Health Care", new String[]{"United PPO", "United PPO Plus"}));
     }
 
     public static class Provider

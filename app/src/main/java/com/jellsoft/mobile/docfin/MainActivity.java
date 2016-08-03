@@ -1,5 +1,6 @@
 package com.jellsoft.mobile.docfin;
 
+import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,15 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.insuranceId).clearFocus();
         findViewById(R.id.firstName).requestFocus();
-        //populateInsuranceProviders();
     }
 
-    private void populateInsuranceProviders() {
-        ArrayAdapter<Insurance.Provider> insuranceProviders = new ArrayAdapter<Insurance.Provider>(this,
-                R.layout.textviewonly, Insurance.providers);
-        ListView listView = (ListView) findViewById(R.id.insuranceProviders);
-        listView.setAdapter(insuranceProviders);
-    }
 
     public void registerUser(View view) {
         //view is the button.
@@ -37,10 +31,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectInsurance(View insuranceET) {
-        setContentView(R.layout.insuranceproviders);
-        populateInsuranceProviders();
+        Intent intent = new Intent(getApplicationContext(), SelectInsuranceActivity.class);
+        startActivityForResult(intent, 100);
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 200){
+
+            String insurance = data.getStringExtra("insurance");
+        }
+
+    }
     private void validateUserRegistrationFields() {
         validateEditText((EditText) findViewById(R.id.firstName));
         validateEditText((EditText) findViewById(R.id.lastName));

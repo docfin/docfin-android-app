@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
+    tools:context="com.jellsoft.mobile.docfin.SelectInsuranceActivity">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -22,7 +23,8 @@
             android:textAppearance="@style/Base.DialogWindowTitleBackground.AppCompat"
             android:elegantTextHeight="false"
             android:paddingTop="20dp"
-            android:paddingLeft="15dp" />
+            android:paddingLeft="20dp"
+            android:onClick="exitInsurancePicker"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,10 +34,12 @@
             android:layout_gravity="center"
             android:layout_weight=".7"
             android:textAppearance="@style/Base.DialogWindowTitleBackground.AppCompat"
-            android:paddingLeft="20dp"
+            android:paddingLeft="25dp"
             android:paddingTop="16dp"
             android:textSize="24dp" />
     </LinearLayout>
+
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
