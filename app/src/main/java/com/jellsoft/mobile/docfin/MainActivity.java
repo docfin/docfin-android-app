@@ -1,16 +1,10 @@
 package com.jellsoft.mobile.docfin;
 
 import android.content.Intent;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-
-import com.jellsoft.mobile.docfin.model.Insurance;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectInsurance(View insuranceET) {
-        Intent intent = new Intent(getApplicationContext(), SelectInsuranceActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SelectInsuranceProviderActivity.class);
         startActivityForResult(intent, 100);
 
     }

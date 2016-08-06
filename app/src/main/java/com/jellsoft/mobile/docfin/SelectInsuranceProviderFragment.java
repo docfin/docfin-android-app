@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ import com.jellsoft.mobile.docfin.model.Insurance;
 /**
  * Created by atulanand on 8/6/16.
  */
-public class SelectInsuranceFragment extends Fragment implements View.OnClickListener
+public class SelectInsuranceProviderFragment extends Fragment
 {
 
     @Override
@@ -29,7 +30,21 @@ public class SelectInsuranceFragment extends Fragment implements View.OnClickLis
         this.populateInsuranceProviders(v);
 
         TextView closeLabel = (TextView)v.findViewById(R.id.closeSelectInsurance);
-        closeLabel.setOnClickListener(this);
+        closeLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
+        ListView insuranceProviderList = (ListView) v.findViewById(R.id.insuranceProviders);
+        insuranceProviderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                ((SelectInsuranceProviderActivity)getActivity()).startSelectPlanActivity(position);
+            }
+        });
+
         return v;
     }
 
@@ -40,16 +55,4 @@ public class SelectInsuranceFragment extends Fragment implements View.OnClickLis
         listView.setAdapter(insuranceProviders);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId())
-        {
-            case R.id.closeSelectInsurance:
-                getActivity().finish();
-                break;
-            default:
-                break;
-        }
-
-    }
 }
