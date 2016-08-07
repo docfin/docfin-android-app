@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+import com.jellsoft.mobile.docfin.model.Insurance;
+import com.jellsoft.mobile.docfin.model.IntentConstants;
+
+public class RegisterUserActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register_user);
 
         findViewById(R.id.insuranceId).clearFocus();
         findViewById(R.id.firstName).requestFocus();
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectInsurance(View insuranceET) {
         Intent intent = new Intent(getApplicationContext(), SelectInsuranceProviderActivity.class);
-        startActivityForResult(intent, 100);
+        startActivityForResult(intent, IntentConstants.COMPLETED_WITH_RESULT);
 
     }
 
@@ -34,9 +37,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 200){
-
-            String insurance = data.getStringExtra("insurance");
+        if(resultCode == IntentConstants.COMPLETED_WITH_RESULT){
+            int providerId = data.getIntExtra(IntentConstants.INSURANCE_PROVIDER, -1);
+            int planId = data.getIntExtra(IntentConstants.INSURANCE_PLAN, -1);
+            Insurance.Provider provider = Insurance.providers.get(providerId);
+            Insurance.Plan plan = provider.plans.get(planId);
+            String insuranceText = provider.name + ", " + plan.name;
+            ((EditText)findViewById(R.id.insuranceId)).setText(insuranceText);
         }
 
     }

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.Insurance;
 
 /**
@@ -28,7 +29,7 @@ public class SelectInsurancePlanFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         final Intent intent = getActivity().getIntent();
-        int providerId = intent.getIntExtra(SelectInsuranceProviderActivity.PROVIDER, 0);
+        int providerId = intent.getIntExtra(IntentConstants.INSURANCE_PROVIDER, 0);
 
         View v = inflater.inflate(R.layout.select_insurance_plan_fragment, container, false);
         this.populateInsurancePlans(v, Insurance.providers.get(providerId));
