@@ -10,8 +10,8 @@
     <string name="user.lastName.error">Please enter the last name</string>
     <string name="user.email.error">Please enter your email</string>
     <string name="user.insurance.error">Please select your insurance</string>
-    <string name="tag_line">Finding doctors made easy!</string>
-    <string name="registerUser">Sign Up!</string>
-    <string name="welcome_msg">Welcome to \nDocfin!</string>
+    <string name="tag_line">Finding doctors made easy</string>
+    <string name="registerUser">Sign Up</string>
+    <string name="welcome_msg">Welcome to \nDocfin</string>
     <string name="register_msg">Before we get started:</string>
 </resources>

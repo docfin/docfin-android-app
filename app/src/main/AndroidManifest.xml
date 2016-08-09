@@ -15,8 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectInsuranceProviderActivity"></activity>
-        <activity android:name=".SelectInsurancePlanActivity"></activity>
+        <activity android:name=".SelectInsuranceProviderActivity" />
+        <activity android:name=".SelectInsurancePlanActivity" />
+        <activity android:name=".DoctorSearchActivity"></activity>
     </application>
 
 </manifest>
