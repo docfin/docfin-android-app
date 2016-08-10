@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mi_menu"
+        android:icon="@drawable/ic_action_main_menu"
+        app:showAsAction="always"
+        android:title="Main Menu"
+        >
+    </item>
+    <item
+        android:id="@+id/mi_menu_title"
+        app:showAsAction="always"
+        android:title="Doctor Search"
+        >
+    </item>
+
+    <item
+        android:id="@+id/mi_search"
+        android:icon="@drawable/ic_action_search"
+        app:showAsAction="always"
+        android:title="Search">
+    </item>
+
+
+</menu>

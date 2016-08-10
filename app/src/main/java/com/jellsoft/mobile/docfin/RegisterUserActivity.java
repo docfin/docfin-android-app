@@ -8,9 +8,11 @@ import android.widget.EditText;
 
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
+import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
+    private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,13 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     public void registerUser(View view) {
         //view is the button.
+        this.errorMessages.reset();
         validateUserRegistrationFields();
+        if (errorMessages.hasNoErrors())
+        {
+            Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void selectInsurance(View insuranceET) {
@@ -58,20 +66,26 @@ public class RegisterUserActivity extends AppCompatActivity {
         if (editText.getText().toString().trim().isEmpty()) {
             switch (editText.getId()) {
                 case R.id.firstName:
-                    editText.setError(getString(R.string.user_firstName_error));
+                    showErrorMsg(editText, getString(R.string.user_firstName_error));
                     break;
                 case R.id.lastName:
-                    editText.setError(getString(R.string.user_lastName_error));
+                    showErrorMsg(editText, getString(R.string.user_lastName_error));
                     break;
                 case R.id.emailId:
-                    editText.setError(getString(R.string.user_email_error));
+                    showErrorMsg(editText, getString(R.string.user_email_error));
                     break;
                 case R.id.insuranceId:
-                    editText.setError(getString(R.string.user_insurance_error));
+                    showErrorMsg(editText, getString(R.string.user_insurance_error));
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    private void showErrorMsg(EditText editText, String msg)
+    {
+        editText.setError(msg);
+        this.errorMessages.addErrorMsg(editText.getId(), msg);
     }
 }

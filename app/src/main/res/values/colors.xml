@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorActionBar">#E1E3F0</color>
+    <color name="colorActionBarLight">#EBECF7</color>
     <color name="colorActionMenuIcon">#525572</color>
+    <color name="colorActionMenuIconDarker">#525572</color>
 </resources>
