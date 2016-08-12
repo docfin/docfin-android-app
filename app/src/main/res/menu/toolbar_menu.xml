@@ -3,25 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/mi_menu"
-        android:icon="@drawable/ic_action_main_menu"
+        android:id="@+id/mi_appointments"
+        android:title="Your Appointments"
         app:showAsAction="always"
-        android:title="Main Menu"
         >
     </item>
-    <item
-        android:id="@+id/mi_menu_title"
-        app:showAsAction="always"
-        android:title="Doctor Search"
-        >
-    </item>
-
     <item
         android:id="@+id/mi_search"
-        android:icon="@drawable/ic_action_search"
         app:showAsAction="always"
-        android:title="Search">
+        android:title="Search Doctors"
+        >
     </item>
-
-
+    <item
+        android:id="@+id/mi_settings"
+        app:showAsAction="always"
+        android:title="Settings">
+    </item>
 </menu>

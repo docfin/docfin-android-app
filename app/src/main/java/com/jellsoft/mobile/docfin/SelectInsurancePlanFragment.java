@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jellsoft.mobile.docfin.activity.SelectInsurancePlanActivity;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.Insurance;
 

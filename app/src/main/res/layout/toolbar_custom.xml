@@ -7,11 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@drawable/layout_bg"
-    android:elevation="1dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="10dp"
+    android:elevation="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginBottom="0dp"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     >
@@ -31,7 +31,8 @@
         android:layout_weight=".1"
         android:textSize="24dp"
         android:textAlignment="center"
-        android:text="Screen Title"/>
+        android:text="Screen Title"
+        android:textColor="#ffffff"/>
 
     <ImageView
         android:layout_width="match_parent"

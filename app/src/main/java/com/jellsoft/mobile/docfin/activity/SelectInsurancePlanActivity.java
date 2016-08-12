@@ -1,7 +1,8 @@
-package com.jellsoft.mobile.docfin;
+package com.jellsoft.mobile.docfin.activity;
 
 import android.support.v4.app.Fragment;
 
+import com.jellsoft.mobile.docfin.SelectInsurancePlanFragment;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 
 /**

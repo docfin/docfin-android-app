@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jellsoft.mobile.docfin.activity.SelectInsuranceProviderActivity;
 import com.jellsoft.mobile.docfin.model.Insurance;
 
 /**

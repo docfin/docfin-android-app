@@ -1,4 +1,4 @@
-package com.jellsoft.mobile.docfin;
+package com.jellsoft.mobile.docfin.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;

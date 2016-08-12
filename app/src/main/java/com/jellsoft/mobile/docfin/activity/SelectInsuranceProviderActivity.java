@@ -1,8 +1,9 @@
-package com.jellsoft.mobile.docfin;
+package com.jellsoft.mobile.docfin.activity;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.jellsoft.mobile.docfin.SelectInsuranceProviderFragment;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 
 public class SelectInsuranceProviderActivity extends SingleFragmentActivity {
