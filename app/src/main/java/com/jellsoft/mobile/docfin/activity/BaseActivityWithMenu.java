@@ -12,12 +12,9 @@ import com.jellsoft.mobile.docfin.R;
  */
 public class BaseActivityWithMenu extends AppCompatActivity {
 
-    DisplayPopupMenu popupMenu;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.popupMenu = new DisplayPopupMenu(getBaseContext());
 
         // Find the toolbar view inside the activity layout
        /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -25,12 +22,6 @@ public class BaseActivityWithMenu extends AppCompatActivity {
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);*/
-    }
-
-    protected void attachToolbarMenu()
-    {
-        View displayMainMenuIcon = findViewById(R.id.toolbar_main_menu);
-        displayMainMenuIcon.setOnClickListener(popupMenu);
     }
 
 }

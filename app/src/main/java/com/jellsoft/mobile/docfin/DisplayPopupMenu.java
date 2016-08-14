@@ -8,20 +8,16 @@ import android.view.View;
 /**
  * Created by atulanand on 8/11/16.
  */
-public class DisplayPopupMenu implements View.OnClickListener
-{
+public class DisplayPopupMenu implements View.OnClickListener {
 
-    Context context;
 
-    public DisplayPopupMenu(Context context)
-    {
-        this.context = context;
+    public DisplayPopupMenu() {
     }
 
     @Override
     public void onClick(View view) {
 // This is an android.support.v7.widget.PopupMenu;
-        PopupMenu popupMenu = new PopupMenu(context, view);
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
