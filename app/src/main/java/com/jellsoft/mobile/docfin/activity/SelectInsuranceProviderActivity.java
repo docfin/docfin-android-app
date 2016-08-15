@@ -3,10 +3,10 @@ package com.jellsoft.mobile.docfin.activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.jellsoft.mobile.docfin.SelectInsuranceProviderFragment;
+import com.jellsoft.mobile.docfin.fragment.SelectInsuranceProviderFragment;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 
-public class SelectInsuranceProviderActivity extends SingleFragmentActivity {
+public class SelectInsuranceProviderActivity extends BaseInsuranceFragmentActivity {
 
     @Override
     protected Fragment createFragment() {

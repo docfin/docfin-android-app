@@ -12,16 +12,24 @@
         layout="@layout/toolbar_custom"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_large_margin"
         android:text="I am looking for a:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <AutoCompleteTextView
         android:id="@+id/selectDoctorSpeciality"
@@ -36,5 +44,30 @@
         android:hint="@string/selDocSpeciality"
         />
 
+    <TextView
+        android:id="@+id/docSearchDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="On Date:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:id="@+id/docSearchDateButton"
+            android:background="@color/colorDateButton"
+            android:text="@string/pick_date"
+            android:onClick="showDatePickerDialog"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            />
+
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

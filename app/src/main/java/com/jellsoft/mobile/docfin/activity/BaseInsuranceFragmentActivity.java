@@ -10,7 +10,7 @@ import com.jellsoft.mobile.docfin.R;
 /**
  * Created by atulanand on 8/6/16.
  */
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class BaseInsuranceFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
 
@@ -27,4 +27,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             fm.beginTransaction().add(R.id.single_frame_container, fragment).commit();
         }
     }
+
+
 }

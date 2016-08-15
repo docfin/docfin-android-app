@@ -1,4 +1,4 @@
-package com.jellsoft.mobile.docfin;
+package com.jellsoft.mobile.docfin.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.activity.SelectInsuranceProviderActivity;
 import com.jellsoft.mobile.docfin.model.Insurance;
 

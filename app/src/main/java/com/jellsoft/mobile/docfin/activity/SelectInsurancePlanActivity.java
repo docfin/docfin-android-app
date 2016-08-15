@@ -2,13 +2,13 @@ package com.jellsoft.mobile.docfin.activity;
 
 import android.support.v4.app.Fragment;
 
-import com.jellsoft.mobile.docfin.SelectInsurancePlanFragment;
+import com.jellsoft.mobile.docfin.fragment.SelectInsurancePlanFragment;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 
 /**
  * Created by atulanand on 8/6/16.
  */
-public class SelectInsurancePlanActivity extends SingleFragmentActivity {
+public class SelectInsurancePlanActivity extends BaseInsuranceFragmentActivity {
 
 
     @Override

@@ -15,4 +15,7 @@
     <string name="welcome_msg">Welcome to \nDocfin</string>
     <string name="register_msg">Before we get started:</string>
     <string name="selDocSpeciality">Select Speciality</string>
+    <string name="pick_date">Appoinment Date</string>
+
+    <string name="dateFormat">EEE, MMM d, \'\'yy</string>
 </resources>
