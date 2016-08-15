@@ -2,15 +2,11 @@ package com.jellsoft.mobile.docfin.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-
-import com.jellsoft.mobile.docfin.DisplayPopupMenu;
-import com.jellsoft.mobile.docfin.R;
 
 /**
  * Created by atulanand on 8/11/16.
  */
-public class BaseActivityWithMenu extends AppCompatActivity {
+public abstract class BaseActivityWithMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

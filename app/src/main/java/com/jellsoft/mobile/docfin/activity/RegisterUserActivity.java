@@ -1,8 +1,10 @@
 package com.jellsoft.mobile.docfin.activity;
 
 import android.content.Intent;
+import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -10,6 +12,7 @@ import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
+import com.jellsoft.mobile.docfin.util.ValidateInput;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
@@ -59,12 +62,17 @@ public class RegisterUserActivity extends AppCompatActivity {
     private void validateUserRegistrationFields() {
         validateEditText((EditText) findViewById(R.id.firstName));
         validateEditText((EditText) findViewById(R.id.lastName));
-        validateEditText((EditText) findViewById(R.id.emailId));
+        EditText email = (EditText) findViewById(R.id.emailId);
+        validateEditText(email);
         validateEditText((EditText) findViewById(R.id.insuranceId));
+        if(!ValidateInput.isValidEmail(email.getText().toString()))
+        {
+            showErrorMsg(email, getString(R.string.user_email_error));
+        }
     }
 
     private void validateEditText(EditText editText) {
-        if (editText.getText().toString().trim().isEmpty()) {
+        if (TextUtils.isEmpty(editText.getText().toString())) {
             switch (editText.getId()) {
                 case R.id.firstName:
                     showErrorMsg(editText, getString(R.string.user_firstName_error));
@@ -82,6 +90,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                     break;
             }
         }
+
     }
 
     private void showErrorMsg(EditText editText, String msg)
