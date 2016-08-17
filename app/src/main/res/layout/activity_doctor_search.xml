@@ -29,12 +29,12 @@
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_large_margin"
                 android:text="I am looking for a:"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <AutoCompleteTextView
                 android:id="@+id/selectDoctorSpeciality"
@@ -48,12 +48,12 @@
 
             <TextView
                 android:id="@+id/docSearchDateLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="On Date:"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
                 android:id="@+id/docSearchDateButton"
@@ -64,16 +64,16 @@
                 android:inputType="date"
                 android:onClick="showDatePickerDialog"
                 android:text="@string/pick_date"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/docSearchLocLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="Near Location:"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/docSearchLoc"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:hint="Use my location"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/checkBox"
                     android:layout_toRightOf="@+id/checkBox"
-                    android:text="Use my insurance plan"
+                    android:text="In Network"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </RelativeLayout>
@@ -118,6 +118,8 @@
                 android:id="@+id/docSearchSubmitButton"
                 android:layout_marginTop="@dimen/activity_vertical_large_margin"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
+                android:background="@drawable/layout_rounded"
                 />
 
 

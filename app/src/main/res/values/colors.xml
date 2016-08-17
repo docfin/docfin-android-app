@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorDateButton">#FF4081</color>
-    <color name="colorActionBar">#E1E3F0</color>
-    <color name="colorActionBarLight">#EBECF7</color>
-    <color name="colorActionMenuIcon">#525572</color>
-    <color name="colorActionMenuIconDarker">#373A56</color>
+    <!--<color name="colorActionBar">#E1E3F0</color>
+    <color name="colorActionBarLight">#EBECF7</color>-->
+    <!--<color name="colorActionMenuIcon">#525572</color>
+    <color name="colorActionMenuIconDarker">#373A56</color>-->
+    <color name="colorToolbar">#094FA4</color>
+    <color name="white">#FFFFFF</color>
 </resources>

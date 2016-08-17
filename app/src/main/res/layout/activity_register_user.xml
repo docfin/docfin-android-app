@@ -1,135 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activity.RegisterUserActivity"
-    android:windowSoftInputMode="stateAlwaysHidden">
+    android:orientation="vertical"
+    android:windowSoftInputMode="stateAlwaysHidden"
+    tools:context=".activity.RegisterUserActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/tag_line"
         android:id="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="italic"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="right"
+        android:background="@color/colorToolbar"
+        android:gravity="center|fill_vertical"
+        android:singleLine="false"
         android:text="@string/welcome_msg"
-        android:id="@+id/textView"
-        android:layout_marginTop="46dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
-        android:textAlignment="center" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/register_msg"
-        android:id="@+id/textView3"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/firstName"
-        android:layout_alignEnd="@+id/firstName"
-        android:layout_alignLeft="@+id/firstName"
-        android:layout_alignStart="@+id/firstName" />
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/user.firstName"
-        android:ems="10"
-        android:id="@+id/firstName"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="27dp"
-        android:autoText="true"
-        android:clickable="true"
-        android:fontFamily="Arial"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/user.lastName"
-        android:ems="10"
-        android:id="@+id/lastName"
-        android:layout_below="@+id/firstName"
-        android:layout_alignLeft="@+id/firstName"
-        android:layout_alignStart="@+id/firstName"
-        android:layout_alignRight="@+id/firstName"
-        android:layout_alignEnd="@+id/firstName"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/emailId"
-        android:layout_below="@+id/lastName"
-        android:layout_alignLeft="@+id/lastName"
-        android:layout_alignStart="@+id/lastName"
-        android:hint="@string/user.email"
-        android:layout_alignRight="@+id/lastName"
-        android:layout_alignEnd="@+id/lastName"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-
-        />
-
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/user.insurance"
-        android:id="@+id/insuranceId"
-        android:layout_below="@+id/emailId"
-        android:layout_alignLeft="@+id/emailId"
-        android:layout_alignStart="@+id/emailId"
-        android:layout_alignRight="@+id/emailId"
-        android:layout_alignEnd="@+id/emailId"
-        android:textIsSelectable="true"
-        android:onClick="selectInsurance"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
-        />
+        android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/registerUser"
-        android:onClick="registerUser"
-        android:id="@+id/saveButton"
-        android:layout_below="@+id/insuranceId"
-        android:layout_alignRight="@+id/insuranceId"
-        android:layout_alignEnd="@+id/insuranceId"
-        android:layout_marginTop="30dp"
-        android:layout_alignLeft="@+id/insuranceId"
-        android:layout_alignStart="@+id/insuranceId" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/activity_vertical_large_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            >
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_below="@+id/textView2"
+                android:text="@string/tag_line"
+                android:textAlignment="center"
+                android:textStyle="italic"
+                android:gravity="center|fill_horizontal"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="40dp"
+                android:text="@string/register_msg"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/textView"
+                android:layout_below="@+id/textView3"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:fontFamily="Arial"
+                android:hint="@string/user.firstName"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/lastName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/firstName"
+                android:layout_alignLeft="@+id/firstName"
+                android:layout_alignRight="@+id/firstName"
+                android:layout_alignStart="@+id/firstName"
+                android:layout_below="@+id/firstName"
+                android:ems="10"
+                android:hint="@string/user.lastName"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/emailId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/lastName"
+                android:layout_alignLeft="@+id/lastName"
+                android:layout_alignRight="@+id/lastName"
+                android:layout_alignStart="@+id/lastName"
+                android:layout_below="@+id/lastName"
+                android:ems="10"
+                android:hint="@string/user.email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+
+                />
+
+            <EditText
+                android:id="@+id/insuranceId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/emailId"
+                android:layout_alignLeft="@+id/emailId"
+                android:layout_alignRight="@+id/emailId"
+                android:layout_alignStart="@+id/emailId"
+                android:layout_below="@+id/emailId"
+                android:hint="@string/user.insurance"
+                android:imeOptions="actionNext"
+                android:onClick="selectInsurance"
+                android:singleLine="true"
+                android:textIsSelectable="true" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:onClick="registerUser"
+                android:text="@string/registerUser"
+                android:background="@drawable/layout_rounded"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

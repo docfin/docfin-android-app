@@ -10,12 +10,12 @@
     <string name="user.lastName.error">Please enter the last name</string>
     <string name="user.email.error">Please enter a valid email</string>
     <string name="user.insurance.error">Please select your insurance</string>
-    <string name="tag_line">Finding doctors made easy</string>
+    <string name="tag_line">Finding doctors made easy!</string>
     <string name="registerUser">Sign Up</string>
-    <string name="welcome_msg">Welcome to \nDocfin</string>
+    <string name="welcome_msg">Welcome to Docfin</string>
     <string name="register_msg">Before we get started:</string>
     <string name="selDocSpeciality">Select Speciality</string>
     <string name="pick_date">Appoinment Date</string>
 
-    <string name="dateFormat">EEE, MMM d, \'\'yy</string>
+    <string name="dateFormat">EEE, MMM d</string>
 </resources>
