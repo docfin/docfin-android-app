@@ -1,8 +1,6 @@
 package com.jellsoft.mobile.docfin.activity;
 
 import android.content.Intent;
-import android.support.v4.text.TextUtilsCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,7 +12,7 @@ import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
-public class RegisterUserActivity extends AppCompatActivity {
+public class RegisterUserActivity extends BaseDocfinActivity {
 
     private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
 
@@ -25,11 +23,13 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         findViewById(R.id.insuranceId).clearFocus();
         findViewById(R.id.firstName).requestFocus();
+        this.closeKeyboard();
     }
 
 
     public void registerUser(View view) {
         //view is the button.
+        this.closeKeyboard();
         this.errorMessages.reset();
         validateUserRegistrationFields();
         if (errorMessages.hasNoErrors())
@@ -40,6 +40,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     }
 
     public void selectInsurance(View insuranceET) {
+        this.closeKeyboard();
         Intent intent = new Intent(getApplicationContext(), SelectInsuranceProviderActivity.class);
         startActivityForResult(intent, IntentConstants.COMPLETED_WITH_RESULT);
 

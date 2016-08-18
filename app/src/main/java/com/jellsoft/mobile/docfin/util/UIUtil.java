@@ -1,5 +1,6 @@
 package com.jellsoft.mobile.docfin.util;
 
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,5 +13,14 @@ public class UIUtil {
         final Calendar c = Calendar.getInstance();
         c.set(year, month, day, 0, 0);
         return c.getTime();
+    }
+
+    public static String urlEncode(String str) {
+        try {
+            return URLEncoder.encode(str, "utf8");
+        } catch (Exception e) {
+            //ignore
+        }
+        return str;
     }
 }

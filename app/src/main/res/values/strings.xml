@@ -18,4 +18,10 @@
     <string name="pick_date">Appoinment Date</string>
 
     <string name="dateFormat">EEE, MMM d</string>
+
+    <string name="google_loc_autosuggest">https://maps.googleapis.com/maps/api/place/autocomplete/json</string>
+    <string name="google_apiKey">AIzaSyC7PpL7lg8LT0LbAgKsqF59Pp-8cWRiUzQ</string>
+
+    <string name="network_conn_error">Unexpected network connectivity error.</string>
+    <string name="network_missing_error">Cannot perform the function as there is no network connection.</string>
 </resources>

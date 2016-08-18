@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DoctorSearchActivity extends AppCompatActivity implements OnDateSelectedListener {
+public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSelectedListener {
 
     SimpleDateFormat sdf;
 
@@ -31,10 +32,15 @@ public class DoctorSearchActivity extends AppCompatActivity implements OnDateSel
         findViewById(R.id.toolbar_main_menu).setOnClickListener(new DisplayPopupMenu());
         ((TextView) findViewById(R.id.toolbar_screen_title)).setText("Doctor Search");
 
+        this.closeKeyboard();
+
+        ((CheckBox) findViewById(R.id.docSearchInNetwork)).setChecked(true);
+
         populateDoctorSpecialities();
         sdf =  new SimpleDateFormat(getResources().getString(R.string.dateFormat));
 
         this.onDateSelected(Calendar.getInstance().getTime());
+
     }
 
     private void populateDoctorSpecialities() {
@@ -58,5 +64,6 @@ public class DoctorSearchActivity extends AppCompatActivity implements OnDateSel
     {
         Button dateButton = (Button) findViewById(R.id.docSearchDateButton);
         dateButton.setText(sdf.format(date));
+        this.closeKeyboard();
     }
 }
