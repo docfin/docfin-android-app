@@ -5,12 +5,9 @@ package com.jellsoft.mobile.docfin.model;
  */
 public class DoctorSpecialization {
 
-    private  String id;
-    private String speciality;
+    private final String id;
+    private final String speciality;
 
-
-    public DoctorSpecialization() {
-    }
 
     public DoctorSpecialization(String id, String specialization) {
         this.id = id;

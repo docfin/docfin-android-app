@@ -3,7 +3,7 @@ package com.jellsoft.mobile.docfin.maps;
 import android.content.Context;
 
 import com.jellsoft.mobile.docfin.network.URLConnector;
-import com.jellsoft.mobile.docfin.util.Json;
+import com.jellsoft.mobile.docfin.json.DocfinJsonParser;
 import com.jellsoft.mobile.docfin.util.UIUtil;
 
 import java.util.ArrayList;
@@ -33,7 +33,6 @@ public class GooglePlaceAPI {
 
         String jsonResults = "";
 
-
         StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
         sb.append("?key=" + API_KEY);
         sb.append("&types=geocode");
@@ -43,7 +42,7 @@ public class GooglePlaceAPI {
 
         //Log.d(TAG, jsonResults.toString());
 
-        GooglePlaceResult result = Json.toObject(jsonResults);
+        GooglePlaceResult result = DocfinJsonParser.toGooglePlaceResult(jsonResults);
         if(result.foundResults())
         {
            return result.getPredictions();
