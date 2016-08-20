@@ -2,18 +2,20 @@ package com.jellsoft.mobile.docfin.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-
 import com.jellsoft.mobile.docfin.DisplayPopupMenu;
+import com.jellsoft.mobile.docfin.PlacesAutoCompleteAdapter;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
+import com.jellsoft.mobile.docfin.fragment.GooglePlaceSearchFragment;
 import com.jellsoft.mobile.docfin.model.DoctorSpecialization;
 import com.jellsoft.mobile.docfin.service.DoctorSpecializationService;
 
@@ -32,9 +34,17 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
         findViewById(R.id.toolbar_main_menu).setOnClickListener(new DisplayPopupMenu());
         ((TextView) findViewById(R.id.toolbar_screen_title)).setText("Doctor Search");
 
-        this.closeKeyboard();
 
         ((CheckBox) findViewById(R.id.docSearchInNetwork)).setChecked(true);
+
+        FragmentManager fm = getSupportFragmentManager();
+        // Check to see if we have retained the worker fragment.
+        GooglePlaceSearchFragment searchFragment = (GooglePlaceSearchFragment) fm.findFragmentByTag("googlePlaceSearch");
+        // If not retained (or first time running), we need to create it.
+        if (searchFragment == null) {
+            searchFragment = new GooglePlaceSearchFragment();
+            fm.beginTransaction().add(searchFragment, "googlePlaceSearch").commit();
+        }
 
         populateDoctorSpecialities();
         sdf =  new SimpleDateFormat(getResources().getString(R.string.dateFormat));
@@ -42,6 +52,7 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
         this.onDateSelected(Calendar.getInstance().getTime());
 
     }
+
 
     private void populateDoctorSpecialities() {
 

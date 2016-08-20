@@ -1,7 +1,7 @@
 package com.jellsoft.mobile.docfin;
 
-import android.content.Context;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -12,20 +12,26 @@ import java.util.List;
 /**
  * Created by atulanand on 8/17/16.
  */
-class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
+public class PlacesAutoCompleteAdapter extends ArrayAdapter<GooglePlaceAPI.GooglePlace> implements Filterable {
 
-    List<GooglePlaceAPI.GooglePlace> resultList;
-
-    Context mContext;
+    AutoCompleteTextView acView;
     int mResource;
 
-    GooglePlaceAPI mPlaceAPI = new GooglePlaceAPI(mContext);
+    public List<GooglePlaceAPI.GooglePlace> resultList;
 
-    public PlacesAutoCompleteAdapter(Context context, int resource) {
-        super(context, resource);
+    public GooglePlaceAPI mPlaceAPI;
 
-        mContext = context;
+    public PlacesAutoCompleteAdapter(AutoCompleteTextView view, int resource) {
+        super(view.getContext(), resource);
+
+        acView = view;
         mResource = resource;
+        mPlaceAPI = new GooglePlaceAPI(acView.getContext());
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new GooglePlacesSearchAdapterFilter(this);
     }
 
     @Override
@@ -35,37 +41,39 @@ class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterab
     }
 
     @Override
-    public String getItem(int position) {
-        return resultList.get(position).getDescription();
+    public GooglePlaceAPI.GooglePlace getItem(int position) {
+        return resultList.get(position);
     }
 
-    @Override
-    public Filter getFilter() {
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
-                if (constraint != null) {
-                    resultList = mPlaceAPI.autocomplete(constraint.toString());
+    public static class GooglePlacesSearchAdapterFilter extends Filter {
+        PlacesAutoCompleteAdapter adapter;
 
-                    filterResults.values = resultList;
-                    filterResults.count = resultList.size();
-                }
+        public GooglePlacesSearchAdapterFilter(PlacesAutoCompleteAdapter adapter) {
+            this.adapter = adapter;
+        }
 
-                return filterResults;
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults filterResults = new FilterResults();
+            if (constraint != null) {
+                adapter.resultList = adapter.mPlaceAPI.autocomplete(constraint.toString());
+
+                filterResults.values = adapter.resultList;
+                filterResults.count = adapter.resultList.size();
             }
+            return filterResults;
+           /* if (constraint != null && constraint.length() > 1)
+                new GooglePlacesSearchAsyncTask(adapter, adapter.acView).execute(constraint.toString());
+            return null;*/
+        }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                if (results != null && results.count > 0) {
-                    notifyDataSetChanged();
-                }
-                else {
-                    notifyDataSetInvalidated();
-                }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            if (results != null && results.count > 0) {
+                adapter.notifyDataSetChanged();
+            } else {
+                adapter.notifyDataSetInvalidated();
             }
-        };
-
-        return filter;
+        }
     }
 }
