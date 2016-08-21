@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/toolbar_search_results"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorToolbar"
+    android:elevation="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginBottom="0dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_back"
+        android:layout_gravity="center"
+        android:id="@+id/toolbar_sr_back"
+        android:layout_weight=".09"
+        />
+
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".5"
+        android:textSize="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Aug, 22"
+        android:textColor="#ffffff"
+        android:id="@+id/toolbar_sr_date"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight=".1">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_filter"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_sr_filter"
+            android:layout_marginRight="15dp"
+            />
+       <!-- <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:text="Filter"
+            android:textColor="#ffffff"
+            android:id="@+id/toolbar_sr_filter"
+            android:layout_weight=".5"
+            />-->
+       <!-- <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:text="Map"
+            android:textColor="#ffffff"
+            android:id="@+id/toolbar_sr_map"
+            android:layout_weight=".5"
+            />-->
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_map"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_sr_map" />
+    </LinearLayout>
+</LinearLayout>
