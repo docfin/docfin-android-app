@@ -39,43 +39,23 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight=".1">
+        android:layout_weight=".02">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_filter"
             android:layout_gravity="center"
             android:id="@+id/toolbar_sr_filter"
-            android:layout_marginRight="15dp"
+            android:paddingLeft="10dp"
             />
-       <!-- <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:textSize="16dp"
-            android:textAlignment="center"
-            android:text="Filter"
-            android:textColor="#ffffff"
-            android:id="@+id/toolbar_sr_filter"
-            android:layout_weight=".5"
-            />-->
-       <!-- <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:textSize="16dp"
-            android:textAlignment="center"
-            android:text="Map"
-            android:textColor="#ffffff"
-            android:id="@+id/toolbar_sr_map"
-            android:layout_weight=".5"
-            />-->
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_map"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_sr_map" />
+            android:id="@+id/toolbar_sr_map"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            />
     </LinearLayout>
 </LinearLayout>
