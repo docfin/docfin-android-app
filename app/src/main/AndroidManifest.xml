@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jellsoft.mobile.docfin">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".activity.SelectInsuranceProviderActivity" />
         <activity android:name=".activity.SelectInsurancePlanActivity" />
-        <activity android:name=".activity.DoctorSearchActivity"></activity>
+        <activity android:name=".activity.DoctorSearchActivity" />
+        <activity android:name=".activity.SearchResultsActivity"></activity>
     </application>
 
 </manifest>
