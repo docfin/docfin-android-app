@@ -13,26 +13,23 @@ public class SelectInsuranceProviderActivity extends BaseInsuranceFragmentActivi
         return new SelectInsuranceProviderFragment();
     }
 
-    public void startSelectPlanActivity(int providerId)
+    public void startSelectPlanActivity(String provider)
     {
         Intent intent = new Intent(getApplicationContext(), SelectInsurancePlanActivity.class);
-        intent.putExtra(IntentConstants.INSURANCE_PROVIDER, providerId);
+        intent.putExtra(IntentConstants.INSURANCE_PROVIDER, provider);
         startActivityForResult(intent, IntentConstants.COMPLETED_WITH_RESULT);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == IntentConstants.COMPLETED_WITH_RESULT){
-
-            int providerId = data.getIntExtra(IntentConstants.INSURANCE_PROVIDER, -1);
-            int planId = data.getIntExtra(IntentConstants.INSURANCE_PLAN, -1);
-            getIntent().putExtra(IntentConstants.INSURANCE_PROVIDER, providerId);
-            getIntent().putExtra(IntentConstants.INSURANCE_PLAN, planId);
+            String providerName = data.getStringExtra(IntentConstants.INSURANCE_PROVIDER);
+            String plan = data.getStringExtra(IntentConstants.INSURANCE_PLAN);
+            getIntent().putExtra(IntentConstants.INSURANCE_PROVIDER, providerName);
+            getIntent().putExtra(IntentConstants.INSURANCE_PLAN, plan);
             setResult(IntentConstants.COMPLETED_WITH_RESULT, getIntent());
-
             finish();
         }
     }

@@ -51,11 +51,10 @@ public class RegisterUserActivity extends BaseDocfinActivity {
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == IntentConstants.COMPLETED_WITH_RESULT){
-            int providerId = data.getIntExtra(IntentConstants.INSURANCE_PROVIDER, -1);
-            int planId = data.getIntExtra(IntentConstants.INSURANCE_PLAN, -1);
-            Insurance.Provider provider = Insurance.providers.get(providerId);
-            Insurance.Plan plan = provider.plans.get(planId);
-            String insuranceText = provider.name + ", " + plan.name;
+            String providerName = data.getStringExtra(IntentConstants.INSURANCE_PROVIDER);
+            String plan = data.getStringExtra(IntentConstants.INSURANCE_PLAN);
+            Insurance.Provider provider = Insurance.provider(providerName);
+            String insuranceText = provider.name + ", " + plan;
             ((EditText)findViewById(R.id.insuranceId)).setText(insuranceText);
         }
 

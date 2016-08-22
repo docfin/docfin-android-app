@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="?attr/actionBarSize"
         android:layout_gravity="center_horizontal"
-        android:background="@color/button_material_light">
-        <TextView
+        android:background="@color/colorToolbar">
+
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="59dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_back"
+            android:layout_gravity="center"
             android:id="@+id/closeSelectInsurance"
-            android:text="Close"
-            android:layout_weight=".25"
-            android:fontFamily="Arial"
-            android:textSize="18dp"
-            android:textAppearance="@style/Base.DialogWindowTitleBackground.AppCompat"
-            android:elegantTextHeight="false"
-            android:paddingTop="20dp"
-            android:paddingLeft="20dp"/>
+            android:layout_weight=".2"
+            />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="59dp"
+            android:layout_height="match_parent"
             android:id="@+id/selectInsuranceMsg"
             android:text="Select Insurance"
-            android:layout_gravity="center"
+            android:gravity="center_vertical"
             android:layout_weight=".7"
             android:textAppearance="@style/Base.DialogWindowTitleBackground.AppCompat"
-            android:paddingLeft="25dp"
-            android:paddingTop="16dp"
-            android:textSize="24dp" />
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            />
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/selectInsuranceProviderRV"
         android:layout_height="match_parent"
-        android:id="@+id/insuranceProviders"
+        android:layout_width="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"></ListView>
+        android:paddingTop="10dp"
+        >
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

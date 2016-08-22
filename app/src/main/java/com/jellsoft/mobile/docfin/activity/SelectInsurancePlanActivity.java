@@ -16,10 +16,10 @@ public class SelectInsurancePlanActivity extends BaseInsuranceFragmentActivity {
         return new SelectInsurancePlanFragment();
     }
 
-    public void insurancePlanSelected(int planId)
+    public void insurancePlanSelected(String plan)
     {
         setResult(200, getIntent());
-        getIntent().putExtra(IntentConstants.INSURANCE_PLAN, planId);
+        getIntent().putExtra(IntentConstants.INSURANCE_PLAN, plan);
         finish();
     }
 
