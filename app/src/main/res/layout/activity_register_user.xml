@@ -130,7 +130,7 @@
                 android:layout_marginTop="30dp"
                 android:onClick="registerUser"
                 android:text="@string/registerUser"
-                android:background="@drawable/layout_rounded"
+                android:background="@drawable/button_layout_rounded"
                 android:textColor="@color/white"
                 />
 

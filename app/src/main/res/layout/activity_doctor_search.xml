@@ -120,7 +120,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_large_margin"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white"
-                android:background="@drawable/layout_rounded"
+                android:background="@drawable/button_layout_rounded"
                 />
 
         </LinearLayout>
