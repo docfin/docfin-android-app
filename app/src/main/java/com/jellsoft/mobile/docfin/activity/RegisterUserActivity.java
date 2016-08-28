@@ -30,13 +30,22 @@ public class RegisterUserActivity extends BaseDocfinActivity {
     public void registerUser(View view) {
         //view is the button.
         this.closeKeyboard();
-        this.errorMessages.reset();
+        this.clearErrorMessages();
         validateUserRegistrationFields();
         if (errorMessages.hasNoErrors())
         {
             Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void clearErrorMessages()
+    {
+        this.errorMessages.reset();
+        ((EditText)findViewById(R.id.firstName)).setError("");
+        ((EditText)findViewById(R.id.lastName)).setError("");
+        ((EditText)findViewById(R.id.emailId)).setError("");
+        ((EditText)findViewById(R.id.insuranceId)).setError("");
     }
 
     public void selectInsurance(View insuranceET) {
