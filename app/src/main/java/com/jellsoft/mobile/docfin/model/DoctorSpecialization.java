@@ -1,9 +1,11 @@
 package com.jellsoft.mobile.docfin.model;
 
+import java.io.Serializable;
+
 /**
  * Created by atulanand on 8/13/16.
  */
-public class DoctorSpecialization {
+public class DoctorSpecialization implements Serializable{
 
     private final String id;
     private final String speciality;

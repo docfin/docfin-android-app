@@ -13,5 +13,11 @@ public class IntentConstants {
     public static final String INSURANCE_PROVIDER = "insuranceProvider";
     public static final String INSURANCE_PLAN = "insurancePlan";
 
+    public static final String SEARCH_SPECIALITY = "SEARCH_SPECIALITY";
+    public static final String SEARCH_DATE = "SEARCH_DATE";
+    public static final String SEARCH_LOCATION = "SEARCH_LOCATION";
+    public static final String SEARCH_IN_NETWORK = "SEARCH_IN_NETWORK";
+
+
 
 }
