@@ -1,116 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/doctor_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_layout_rounded"
-    android:orientation="vertical"
-    android:paddingBottom="15dp"
-    android:paddingTop="15dp"
-    >
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/docImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/ic_doc_placeholder"
-            android:background="@drawable/shape_oval"
-            />
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/docNameAndTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="Dr. Sonia Oberoi, MD"
-                android:textSize="18dp"
-                android:textStyle="bold"
-
-                />
-
-            <TextView
-                android:id="@+id/docSpeciality"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:paddingTop="5dp"
-                android:text="Cardiologist"
-                android:textSize="16dp" />
-
-            <TextView
-                android:id="@+id/docAddrLine1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:paddingTop="5dp"
-                android:text="503 Raritan Ave."
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/docAddrLine2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:paddingTop="5dp"
-                android:text="Highland Park, NJ 08904"
-                android:textSize="14dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/pinDocImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/docImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/ic_action_heart_outline" />
+                android:background="@drawable/shape_oval"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_doc_placeholder" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/docNameAndTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="Dr. Sonia Oberoi, MD"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/docSpeciality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="5dp"
+                    android:text="Cardiologist"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/docAddrLine1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="5dp"
+                    android:text="503 Raritan Ave."
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/docAddrLine2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="5dp"
+                    android:text="Highland Park, NJ 08904"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/pinDocImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_action_heart_outline" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
+        <Button
+            android:id="@+id/docAppointmentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_layout_rounded"
+            android:text="Book Appointment"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/docAppointmentButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_layout_rounded"
-        android:text="Book Appointment"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        />
-</LinearLayout>
-
+</android.support.v7.widget.CardView>

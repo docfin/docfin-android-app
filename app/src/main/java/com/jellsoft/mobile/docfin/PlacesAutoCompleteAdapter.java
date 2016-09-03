@@ -62,9 +62,6 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<GooglePlaceAPI.Googl
                 filterResults.count = adapter.resultList.size();
             }
             return filterResults;
-           /* if (constraint != null && constraint.length() > 1)
-                new GooglePlacesSearchAsyncTask(adapter, adapter.acView).execute(constraint.toString());
-            return null;*/
         }
 
         @Override

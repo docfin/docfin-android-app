@@ -12,9 +12,15 @@ import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
-public class RegisterUserActivity extends BaseDocfinActivity {
+public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener{
 
     private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        this.clearErrorMessages();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,10 @@ public class RegisterUserActivity extends BaseDocfinActivity {
         findViewById(R.id.insuranceId).clearFocus();
         findViewById(R.id.firstName).requestFocus();
         this.closeKeyboard();
+
+        findViewById(R.id.firstName).setOnClickListener(this);
+        findViewById(R.id.lastName).setOnClickListener(this);
+        findViewById(R.id.emailId).setOnClickListener(this);
     }
 
 
@@ -42,14 +52,15 @@ public class RegisterUserActivity extends BaseDocfinActivity {
     private void clearErrorMessages()
     {
         this.errorMessages.reset();
-        ((EditText)findViewById(R.id.firstName)).setError("");
-        ((EditText)findViewById(R.id.lastName)).setError("");
-        ((EditText)findViewById(R.id.emailId)).setError("");
-        ((EditText)findViewById(R.id.insuranceId)).setError("");
+        ((EditText)findViewById(R.id.firstName)).setError(null);
+        ((EditText)findViewById(R.id.lastName)).setError(null);
+        ((EditText)findViewById(R.id.emailId)).setError(null);
+        ((EditText)findViewById(R.id.insuranceId)).setError(null);
     }
 
-    public void selectInsurance(View insuranceET) {
+    public void selectInsurance(View selectInsurance) {
         this.closeKeyboard();
+        ((EditText)selectInsurance).setError(null);
         Intent intent = new Intent(getApplicationContext(), SelectInsuranceProviderActivity.class);
         startActivityForResult(intent, IntentConstants.COMPLETED_WITH_RESULT);
 
@@ -106,5 +117,13 @@ public class RegisterUserActivity extends BaseDocfinActivity {
     {
         editText.setError(msg);
         this.errorMessages.addErrorMsg(editText.getId(), msg);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view instanceof EditText)
+        {
+            ((EditText)view).setError(null);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.jellsoft.mobile.docfin.maps;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 
 import com.jellsoft.mobile.docfin.network.URLConnector;
 import com.jellsoft.mobile.docfin.json.DocfinJsonParser;
@@ -33,12 +35,14 @@ public class GooglePlaceAPI {
 
         String jsonResults = "";
 
-        StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
-        sb.append("?key=" + API_KEY);
-        sb.append("&types=geocode");
-        sb.append("&input=" + UIUtil.urlEncode(input));
+        String googlePlaceURL = Uri.parse(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON).buildUpon()
+                .appendQueryParameter("key", API_KEY)
+                .appendQueryParameter("types", "geocode")
+                .appendQueryParameter("input" , input).build().toString();
 
-        jsonResults = new URLConnector(context).doGet(sb.toString());
+        Log.d("GoogleAPI", googlePlaceURL);
+
+        jsonResults = new URLConnector(context).doGet(googlePlaceURL);
 
         //Log.d(TAG, jsonResults.toString());
 

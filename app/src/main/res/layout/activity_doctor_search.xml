@@ -82,6 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:hint="Use my location"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <RelativeLayout

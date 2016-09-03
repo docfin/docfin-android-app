@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.RegisterUserActivity">
+        <activity android:name=".activity.RegisterUserActivity" android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +21,7 @@
         </activity>
         <activity android:name=".activity.SelectInsuranceProviderActivity" />
         <activity android:name=".activity.SelectInsurancePlanActivity" />
-        <activity android:name=".activity.DoctorSearchActivity" />
+        <activity android:name=".activity.DoctorSearchActivity" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.SearchResultsActivity"></activity>
     </application>
 
