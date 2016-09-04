@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jellsoft.mobile.docfin.DisplayPopupMenu;
@@ -17,13 +16,11 @@ import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
 import com.jellsoft.mobile.docfin.fragment.GooglePlaceSearchFragment;
 import com.jellsoft.mobile.docfin.model.DoctorSpecialization;
-import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.service.DoctorSpecializationService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 

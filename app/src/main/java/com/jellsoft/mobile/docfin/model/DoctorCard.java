@@ -62,4 +62,8 @@ public class DoctorCard implements Serializable{
     public String getImageURL() {
         return imageURL;
     }
+
+    public void toggleFavoriteStatus() {
+        this.favorite = !this.favorite;
+    }
 }

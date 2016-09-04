@@ -92,7 +92,7 @@
                 android:orientation="vertical">
 
                 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/pinDocImage"
+                    android:id="@+id/docIsFavoriteStatus"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginBottom="15dp"
