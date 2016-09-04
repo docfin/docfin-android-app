@@ -17,7 +17,7 @@ public class SelectInsuranceProviderActivity extends BaseInsuranceFragmentActivi
     {
         Intent intent = new Intent(getApplicationContext(), SelectInsurancePlanActivity.class);
         intent.putExtra(IntentConstants.INSURANCE_PROVIDER, provider);
-        startActivityForResult(intent, IntentConstants.COMPLETED_WITH_RESULT);
+        startActivityForResult(intent, IntentConstants.SELECT_INSURANCE_PLAN);
     }
 
     @Override

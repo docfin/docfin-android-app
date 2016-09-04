@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jellsoft.mobile.docfin.DisplayPopupMenu;
@@ -16,11 +17,13 @@ import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
 import com.jellsoft.mobile.docfin.fragment.GooglePlaceSearchFragment;
 import com.jellsoft.mobile.docfin.model.DoctorSpecialization;
+import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.service.DoctorSpecializationService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -48,7 +51,7 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
         }
 
         populateDoctorSpecialities();
-        sdf =  new SimpleDateFormat(getResources().getString(R.string.dateFormat));
+        sdf = new SimpleDateFormat(getResources().getString(R.string.dateFormat));
 
         this.onDateSelected(Calendar.getInstance().getTime());
 
@@ -63,14 +66,27 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
     }
 
 
-    private void searchDoctors()
-    {
-        Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
-        intent.putExtra(IntentConstants.SEARCH_SPECIALITY, ((AutoCompleteTextView)findViewById(R.id.selectDoctorSpeciality)).getText().toString());
-        intent.putExtra(IntentConstants.SEARCH_LOCATION, ((AutoCompleteTextView)findViewById(R.id.docSearchLoc)).getText().toString());
+    private void searchDoctors() {
+        Intent intent = new Intent(getApplicationContext(), SearchDoctorsInBackgroundActivity.class);
+        intent.putExtra(IntentConstants.SEARCH_SPECIALITY, ((AutoCompleteTextView) findViewById(R.id.selectDoctorSpeciality)).getText().toString());
+        intent.putExtra(IntentConstants.SEARCH_LOCATION, ((AutoCompleteTextView) findViewById(R.id.docSearchLoc)).getText().toString());
         intent.putExtra(IntentConstants.SEARCH_DATE, getDateSelected());
-        intent.putExtra(IntentConstants.SEARCH_IN_NETWORK,  ((CheckBox) findViewById(R.id.docSearchInNetwork)).isChecked());
-        startActivity(intent);
+        intent.putExtra(IntentConstants.SEARCH_IN_NETWORK, ((CheckBox) findViewById(R.id.docSearchInNetwork)).isChecked());
+        startActivityForResult(intent, IntentConstants.SEARCH_DOCTORS_IN_BACKGROUND);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IntentConstants.SEARCH_DOCTORS_IN_BACKGROUND) {
+            if (resultCode == IntentConstants.COMPLETED_WITH_RESULT) {
+                Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
+                intent.putExtra(IntentConstants.SEARCH_RESULTS, data.getSerializableExtra(IntentConstants.SEARCH_RESULTS));
+                startActivity(intent);
+            }
+        }
     }
 
     private void populateDoctorSpecialities() {
@@ -90,15 +106,13 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
     }
 
     @Override
-    public void onDateSelected(Date date)
-    {
+    public void onDateSelected(Date date) {
         Button dateButton = (Button) findViewById(R.id.docSearchDateButton);
         dateButton.setText(sdf.format(date));
         this.closeKeyboard();
     }
 
-    private Date getDateSelected()
-    {
+    private Date getDateSelected() {
         Button dateButton = (Button) findViewById(R.id.docSearchDateButton);
         try {
             return sdf.parse(dateButton.getText().toString());

@@ -12,7 +12,7 @@ import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
-public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener{
+public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener {
 
     private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
 
@@ -42,51 +42,49 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.closeKeyboard();
         this.clearErrorMessages();
         validateUserRegistrationFields();
-        if (errorMessages.hasNoErrors())
-        {
+        if (errorMessages.hasNoErrors()) {
             Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
             startActivity(intent);
         }
     }
 
-    private void clearErrorMessages()
-    {
+    private void clearErrorMessages() {
         this.errorMessages.reset();
-        ((EditText)findViewById(R.id.firstName)).setError(null);
-        ((EditText)findViewById(R.id.lastName)).setError(null);
-        ((EditText)findViewById(R.id.emailId)).setError(null);
-        ((EditText)findViewById(R.id.insuranceId)).setError(null);
+        ((EditText) findViewById(R.id.firstName)).setError(null);
+        ((EditText) findViewById(R.id.lastName)).setError(null);
+        ((EditText) findViewById(R.id.emailId)).setError(null);
+        ((EditText) findViewById(R.id.insuranceId)).setError(null);
     }
 
     public void selectInsurance(View selectInsurance) {
         this.closeKeyboard();
-        ((EditText)selectInsurance).setError(null);
+        ((EditText) selectInsurance).setError(null);
         Intent intent = new Intent(getApplicationContext(), SelectInsuranceProviderActivity.class);
-        startActivityForResult(intent, IntentConstants.COMPLETED_WITH_RESULT);
-
+        startActivityForResult(intent, IntentConstants.SELECT_INSURANCE_PROVIDER);
     }
 
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == IntentConstants.COMPLETED_WITH_RESULT){
-            String providerName = data.getStringExtra(IntentConstants.INSURANCE_PROVIDER);
-            String plan = data.getStringExtra(IntentConstants.INSURANCE_PLAN);
-            Insurance.Provider provider = Insurance.provider(providerName);
-            String insuranceText = provider.name + ", " + plan;
-            ((EditText)findViewById(R.id.insuranceId)).setText(insuranceText);
+        if (requestCode == IntentConstants.SELECT_INSURANCE_PROVIDER) {
+            if (resultCode == IntentConstants.COMPLETED_WITH_RESULT) {
+                String providerName = data.getStringExtra(IntentConstants.INSURANCE_PROVIDER);
+                String plan = data.getStringExtra(IntentConstants.INSURANCE_PLAN);
+                Insurance.Provider provider = Insurance.provider(providerName);
+                String insuranceText = provider.name + ", " + plan;
+                ((EditText) findViewById(R.id.insuranceId)).setText(insuranceText);
+            }
         }
-
     }
+
     private void validateUserRegistrationFields() {
         validateEditText((EditText) findViewById(R.id.firstName));
         validateEditText((EditText) findViewById(R.id.lastName));
         EditText email = (EditText) findViewById(R.id.emailId);
         validateEditText(email);
         validateEditText((EditText) findViewById(R.id.insuranceId));
-        if(!ValidateInput.isValidEmail(email.getText().toString()))
-        {
+        if (!ValidateInput.isValidEmail(email.getText().toString())) {
             showErrorMsg(email, getString(R.string.user_email_error));
         }
     }
@@ -113,17 +111,15 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
 
     }
 
-    private void showErrorMsg(EditText editText, String msg)
-    {
+    private void showErrorMsg(EditText editText, String msg) {
         editText.setError(msg);
         this.errorMessages.addErrorMsg(editText.getId(), msg);
     }
 
     @Override
     public void onClick(View view) {
-        if(view instanceof EditText)
-        {
-            ((EditText)view).setError(null);
+        if (view instanceof EditText) {
+            ((EditText) view).setError(null);
         }
     }
 }

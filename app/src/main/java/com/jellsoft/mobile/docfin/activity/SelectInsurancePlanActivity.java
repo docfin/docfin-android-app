@@ -18,14 +18,14 @@ public class SelectInsurancePlanActivity extends BaseInsuranceFragmentActivity {
 
     public void insurancePlanSelected(String plan)
     {
-        setResult(200, getIntent());
+        setResult(IntentConstants.COMPLETED_WITH_RESULT, getIntent());
         getIntent().putExtra(IntentConstants.INSURANCE_PLAN, plan);
         finish();
     }
 
     public void backToInsuranceProviders()
     {
-        setResult(100, getIntent());
+        setResult(IntentConstants.COMPLETED_WITHOUT_RESULT, getIntent());
         finish();
     }
 }

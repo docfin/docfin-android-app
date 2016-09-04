@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:windowSoftInputMode="stateAlwaysHidden"
     tools:context=".activity.DoctorSearchActivity">
 
     <include
