@@ -28,7 +28,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_oval"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_doc_placeholder" />
 
             <LinearLayout
@@ -48,8 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Dr. Sonia Oberoi, MD"
-                    android:textSize="18dp"
+                    android:text="Dr. Sonia Oberoi, MD, FAAD"
+                    android:textSize="14dp"
                     android:textStyle="bold"
 
                     />
@@ -62,7 +62,7 @@
                     android:layout_centerVertical="true"
                     android:paddingTop="5dp"
                     android:text="Cardiologist"
-                    android:textSize="16dp" />
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/docAddrLine1"
@@ -72,7 +72,7 @@
                     android:layout_centerVertical="true"
                     android:paddingTop="5dp"
                     android:text="503 Raritan Ave."
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/docAddrLine2"
@@ -82,7 +82,7 @@
                     android:layout_centerVertical="true"
                     android:paddingTop="5dp"
                     android:text="Highland Park, NJ 08904"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
             </LinearLayout>
 
@@ -113,7 +113,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_layout_rounded"
-            android:text="Book Appointment"
+            android:text="Book An Appointment"
             android:textColor="@color/white"
             android:textSize="16dp" />
     </LinearLayout>

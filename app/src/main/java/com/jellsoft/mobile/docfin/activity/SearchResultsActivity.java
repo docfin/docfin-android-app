@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,78 +36,71 @@ public class SearchResultsActivity extends BaseDocfinActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.doctorSearchResultsList);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // specify an adapter (see also next example)
         mAdapter = new DoctorCardRecyclerViewAdapter(searchResults);
         mRecyclerView.setAdapter(mAdapter);
+
+        ImageView backLabel = (ImageView) findViewById(R.id.toolbar_back_image);
+        backLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
-    protected class DoctorCardRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    {
+    protected class DoctorCardRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         private CardView doctorCardView;
         private DoctorCard doctorCard;
 
-        public DoctorCardRecyclerViewHolder(View cardItemView)
-        {
+        public DoctorCardRecyclerViewHolder(View cardItemView) {
             super(cardItemView);
             this.doctorCardView = (CardView) cardItemView;
-
+            this.doctorCardView.findViewById(R.id.docIsFavoriteStatus).setOnClickListener(new ToggleFavoriteStatusListener(this));
+            this.doctorCardView.findViewById(R.id.docAppointmentButton).setOnClickListener(new BookAppointmentListener(this));
         }
 
-        public void bindDoctorCard(DoctorCard doctorCard)
-        {
+        public void bindDoctorCard(DoctorCard doctorCard) {
             this.doctorCard = doctorCard;
             Picasso.with(getApplicationContext())
                     .load(doctorCard.getImageURL())
-                    .placeholder(R.mipmap.ic_doc_placeholder)
-                    .error(R.mipmap.ic_doc_placeholder)
+                    .placeholder(R.drawable.doctor_placeholder)
+                    .error(R.drawable.doctor_placeholder)
                     .transform(new CircularTransformation())
                     .into((ImageView) this.doctorCardView.findViewById(R.id.docImage));
-            ((TextView)doctorCardView.findViewById(R.id.docNameAndTitle)).setText(this.doctorCard.getNameAndTitle());
-            ((TextView)doctorCardView.findViewById(R.id.docSpeciality)).setText(this.doctorCard.getSpeciality());
-            ((TextView)doctorCardView.findViewById(R.id.docAddrLine1)).setText(this.doctorCard.getAddress1());
-            ((TextView)doctorCardView.findViewById(R.id.docAddrLine2)).setText(this.doctorCard.getAddress2());
-            if(doctorCard.isFavorite())
-            {
-                ((ImageView)doctorCardView.findViewById(R.id.docIsFavoriteStatus)).setImageDrawable(getDrawable(R.drawable.ic_action_heart));
-            }
-            else
-            {
-                ((ImageView)doctorCardView.findViewById(R.id.docIsFavoriteStatus)).setImageDrawable(getDrawable(R.drawable.ic_action_heart_outline));
+            ((TextView) doctorCardView.findViewById(R.id.docNameAndTitle)).setText(this.doctorCard.getNameAndTitle());
+            ((TextView) doctorCardView.findViewById(R.id.docSpeciality)).setText(this.doctorCard.getSpeciality());
+            ((TextView) doctorCardView.findViewById(R.id.docAddrLine1)).setText(this.doctorCard.getAddress1());
+            ((TextView) doctorCardView.findViewById(R.id.docAddrLine2)).setText(this.doctorCard.getAddress2());
+            if (doctorCard.isFavorite()) {
+                ((ImageView) doctorCardView.findViewById(R.id.docIsFavoriteStatus)).setImageDrawable(getDrawable(R.drawable.ic_action_heart));
+            } else {
+                ((ImageView) doctorCardView.findViewById(R.id.docIsFavoriteStatus)).setImageDrawable(getDrawable(R.drawable.ic_action_heart_outline));
             }
         }
 
-        @Override
-        public void onClick(View view) {
-            if(view.getId() == R.id.docIsFavoriteStatus)
-            {
-                //toggle doc favorite status
-                if(this.doctorCard.isFavorite())
-                {
-
-                    ((ImageView)doctorCardView.findViewById(R.id.docIsFavoriteStatus)).setImageDrawable(getDrawable(R.drawable.ic_action_heart_outline));
-                }
-                else
-                {
-                    ((ImageView)doctorCardView.findViewById(R.id.docIsFavoriteStatus)).setImageDrawable(getDrawable(R.drawable.ic_action_heart));
-                }
-                this.doctorCard.toggleFavoriteStatus();
+        public void toggleFavoriteStatus(View view) {
+            if (this.doctorCard.isFavorite()) {
+                ((ImageView) view).setImageResource(R.drawable.ic_action_heart_outline);
+            } else {
+                ((ImageView) view).setImageResource(R.drawable.ic_action_heart);
             }
-            //TODO handle book appointment button
+            this.doctorCard.toggleFavoriteStatus();
+        }
+
+        public void bookAnAppointment(View view)
+        {
+
         }
     }
 
-    protected class DoctorCardRecyclerViewAdapter extends RecyclerView.Adapter<DoctorCardRecyclerViewHolder>
-    {
+    protected class DoctorCardRecyclerViewAdapter extends RecyclerView.Adapter<DoctorCardRecyclerViewHolder> {
         private List<DoctorCard> data;
 
-        public DoctorCardRecyclerViewAdapter(List<DoctorCard> data)
-        {
+        public DoctorCardRecyclerViewAdapter(List<DoctorCard> data) {
             this.data = data;
         }
 
@@ -126,6 +120,36 @@ public class SearchResultsActivity extends BaseDocfinActivity {
         @Override
         public int getItemCount() {
             return this.data == null ? 0 : this.data.size();
+        }
+    }
+
+    private class ToggleFavoriteStatusListener implements View.OnClickListener {
+
+        private DoctorCardRecyclerViewHolder viewHolder;
+
+        public ToggleFavoriteStatusListener(DoctorCardRecyclerViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View view) {
+            //toggle doc favorite status
+            Log.d("ToggleFavoriteStatus", "Toggle status ");
+            this.viewHolder.toggleFavoriteStatus(view);
+        }
+    }
+
+    private class BookAppointmentListener implements View.OnClickListener {
+
+        private DoctorCardRecyclerViewHolder viewHolder;
+
+        public BookAppointmentListener(DoctorCardRecyclerViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View view) {
+            this.viewHolder.bookAnAppointment(view);
         }
     }
 }

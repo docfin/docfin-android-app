@@ -5,6 +5,7 @@
   {"id":"Cardiologist", "speciality":"Cardiologist"},
   {"id":"Chiropractor", "speciality":"Chiropractor"},
   {"id":"Dentist", "speciality":"Dentist"},
+  {"id":"Dermatologist", "speciality":"Dermatologist"},
   {"id":"Dietitian", "speciality":"Dietitian"},
   {"id":"ENT", "speciality":"Ear, Nose & Throat Doctor"},
   {"id":"Emergency_Medicine", "speciality":"Emergency Medicine"},
