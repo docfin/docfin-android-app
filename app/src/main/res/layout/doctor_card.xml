@@ -29,7 +29,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_oval"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_doc_placeholder" />
+                android:src="@drawable/doctor_placeholder" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
