@@ -93,7 +93,8 @@ public class SearchResultsActivity extends BaseDocfinActivity {
 
         public void bookAnAppointment(View view)
         {
-
+            Intent intent = new Intent(getApplicationContext(), BookAppointmentActivity.class);
+            startActivity(intent);
         }
     }
 

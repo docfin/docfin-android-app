@@ -27,7 +27,8 @@
             android:name=".activity.DoctorSearchActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.SearchResultsActivity" />
-        <activity android:name=".activity.SearchDoctorsInBackgroundActivity"></activity>
+        <activity android:name=".activity.SearchDoctorsInBackgroundActivity" />
+        <activity android:name=".activity.BookAppointmentActivity"></activity>
     </application>
 
 </manifest>
