@@ -30,7 +30,7 @@
         android:layout_weight="1.3"
         android:textSize="20dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Doctor Profile"
+        android:text="Schedule Appointment"
         android:textColor="#ffffff"
         android:id="@+id/toolbar_sr_date"
         />
