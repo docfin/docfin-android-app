@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/doctorDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jellsoft.mobile.docfin.activity.BookAppointmentActivity"
-    android:id="@+id/doctorDetails">
+    tools:context="com.jellsoft.mobile.docfin.activity.BookAppointmentActivity">
 
     <include
         layout="@layout/toolbar_book_appointment"
@@ -84,10 +84,10 @@
     </LinearLayout>
 
     <TabHost
+        android:id="@+id/tabHost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabHost"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         >
 
@@ -106,39 +106,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
                 <ScrollView
-                    android:id="@+id/linearLayout2"
+                    android:id="@+id/scheduleTabView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="jkjjljljlkjlkjkljlkjkljlkj"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ddfdfdfdfdfdfdfd"/>
+
+                        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/availableDatesRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
                     </LinearLayout>
                 </ScrollView>
 
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
+                <ScrollView
+                    android:id="@+id/doctorProfileTabView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout4"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <ScrollView
+                    android:id="@+id/doctorRatingTabView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+                </ScrollView>
             </FrameLayout>
         </LinearLayout>
     </TabHost>
