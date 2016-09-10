@@ -9,6 +9,7 @@ public class IntentConstants {
     public static final int SELECT_INSURANCE_PLAN = 1000;
     public static final int SELECT_INSURANCE_PROVIDER = 1001;
     public static final int SEARCH_DOCTORS_IN_BACKGROUND = 1002;
+    public static final String BOOK_APPOINTMENT_DOCTOR_CARD = "BOOK_APPOINTMENT_DOCTOR_CARD";
 
     private IntentConstants(){}
 

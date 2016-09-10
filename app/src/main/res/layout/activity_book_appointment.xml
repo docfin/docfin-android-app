@@ -12,154 +12,151 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="100dp"
-                android:paddingRight="70dp">
-
-                <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/docImage"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/shape_oval"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/doctor_placeholder" />
-            </LinearLayout>
-
-            <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/docIsFavoriteStatus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="top"
-                android:src="@drawable/ic_action_heart_outline" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/docNameAndTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:text="Dr. Sonia Oberoi, MD, FAAD"
-            android:textSize="14dp"
-            android:textStyle="bold"
-
-            />
-
-        <TextView
-            android:id="@+id/docSpeciality"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:paddingTop="5dp"
-            android:text="Cardiologist"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/docAddrLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:paddingTop="5dp"
-            android:text="503 Raritan Ave., Highland Park, NJ 08904"
-            android:textSize="12dp" />
-
-    </LinearLayout>
-
-    <TabHost
-        android:id="@+id/tabHost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></TabWidget>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="100dp"
+                        android:paddingRight="70dp">
+
+                        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/docImage"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/doctor_placeholder" />
+                    </LinearLayout>
+
+                    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/docIsFavoriteStatus"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="top"
+                        android:src="@drawable/ic_action_heart_outline" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/docNameAndTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:text="Dr. Sonia Oberoi, MD, FAAD"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/docSpeciality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:paddingTop="5dp"
+                    android:text="Cardiologist"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/docAddrLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:paddingTop="5dp"
+                    android:text="503 Raritan Ave., Highland Park, NJ 08904"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <TabHost
+                android:id="@+id/docDetailsTabHost"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
 
-
-                <ScrollView
-                    android:id="@+id/scheduleTabView"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TabWidget
+                        android:id="@android:id/tabs"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"></TabWidget>
 
-                        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:id="@+id/availableDatesRecycleView"
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ScrollView
+                            android:id="@+id/scheduleTabView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
-                    </LinearLayout>
-                </ScrollView>
+                            android:orientation="vertical">
 
-                <ScrollView
-                    android:id="@+id/doctorProfileTabView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:id="@+id/availableDatesRecycleView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/white"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
+                            </LinearLayout>
+                        </ScrollView>
 
-                    </LinearLayout>
+                        <ScrollView
+                            android:id="@+id/doctorProfileTabView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                </ScrollView>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
-                <ScrollView
-                    android:id="@+id/doctorRatingTabView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                            </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        </ScrollView>
 
-                    </LinearLayout>
-                </ScrollView>
-            </FrameLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+
         </LinearLayout>
-    </TabHost>
 
-
+    </ScrollView>
 </LinearLayout>

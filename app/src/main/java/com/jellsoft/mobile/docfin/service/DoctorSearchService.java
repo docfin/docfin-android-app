@@ -1,6 +1,7 @@
 package com.jellsoft.mobile.docfin.service;
 
 import com.jellsoft.mobile.docfin.model.DoctorCard;
+import com.jellsoft.mobile.docfin.model.DoctorProfileAndCalendar;
 import com.jellsoft.mobile.docfin.model.DoctorSpecialization;
 import com.jellsoft.mobile.docfin.model.Insurance;
 
@@ -13,5 +14,7 @@ import java.util.List;
 public interface DoctorSearchService {
 
     List<DoctorCard> searchDoctors(Date date, String placeId, String specialization, String provider, String plan);
+
+    DoctorProfileAndCalendar getDoctorProfileAndCalendar(Date date, String docId);
 
 }

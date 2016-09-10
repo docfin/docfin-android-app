@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class DoctorCard implements Serializable{
 
+    private final String docId;
+
     private final String nameAndTitle;
 
     private final String speciality;
@@ -22,10 +24,11 @@ public class DoctorCard implements Serializable{
     private final String imageURL;
 
     public DoctorCard(String nameAndTitle, String speciality, String address1, String address2, double distance, String imageURL) {
-        this(nameAndTitle, speciality, address1, address2, false, distance, imageURL);
+        this(nameAndTitle, nameAndTitle, speciality, address1, address2, false, distance, imageURL);
     }
 
-    public DoctorCard(String nameAndTitle, String speciality, String address1, String address2, boolean favorite, double distance, String imageURL) {
+    public DoctorCard(String docId, String nameAndTitle, String speciality, String address1, String address2, boolean favorite, double distance, String imageURL) {
+        this.docId = docId;
         this.nameAndTitle = nameAndTitle;
         this.speciality = speciality;
         this.address1 = address1;
@@ -61,6 +64,10 @@ public class DoctorCard implements Serializable{
 
     public String getImageURL() {
         return imageURL;
+    }
+
+    public String getDocId() {
+        return docId;
     }
 
     public void toggleFavoriteStatus() {

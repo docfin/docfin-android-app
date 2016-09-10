@@ -94,6 +94,7 @@ public class SearchResultsActivity extends BaseDocfinActivity {
         public void bookAnAppointment(View view)
         {
             Intent intent = new Intent(getApplicationContext(), BookAppointmentActivity.class);
+            intent.putExtra(IntentConstants.BOOK_APPOINTMENT_DOCTOR_CARD, this.doctorCard);
             startActivity(intent);
         }
     }
