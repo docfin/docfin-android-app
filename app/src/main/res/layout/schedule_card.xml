@@ -24,13 +24,17 @@
             android:textStyle="bold"
             />
 
-        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/availableTimeSlotsRecycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
+        <org.apmem.tools.layouts.FlowLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/timeSlotsLayout"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+        </org.apmem.tools.layouts.FlowLayout>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -17,6 +17,9 @@ public class Date extends java.util.Date implements Serializable{
         this.date = date;
     }
 
+    public Date(java.util.Date date) {
+        this("EEE, MMM d", date);
+    }
     public Date() {
         this("EEE, MMM d", new java.util.Date());
     }

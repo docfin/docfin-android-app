@@ -4,6 +4,7 @@ import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.DoctorProfileAndCalendar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class MockDoctorSearchService implements DoctorSearchService {
 
     @Override
     public DoctorProfileAndCalendar getDoctorProfileAndCalendar(Date date, String docId) {
-        if("doc1".equals(docId))
-        {
+        if ("doc1".equals(docId)) {
             return mockDoctor1();
         }
         return mockDoctor1();
@@ -60,11 +60,21 @@ public class MockDoctorSearchService implements DoctorSearchService {
         String practice = "Elite Skin MD";
         DoctorProfileAndCalendar.Profile profile = new DoctorProfileAndCalendar.Profile(cv, education, affiliations, certification, languages, practice);
 
-        DoctorProfileAndCalendar.Calendar calendar = new DoctorProfileAndCalendar.Calendar(new com.jellsoft.mobile.docfin.model.Date());
-        for (int i = 0; i < 10; i++) {
-            calendar.addSlot(new DoctorProfileAndCalendar.Calendar.Slot(String.valueOf(i + 9), i < 4 ? DoctorProfileAndCalendar.Calendar.Slot.PartOfDay.AM : DoctorProfileAndCalendar.Calendar.Slot.PartOfDay.PM));
+        DoctorProfileAndCalendar d = new DoctorProfileAndCalendar(this.doc1, profile);
+
+        Calendar calendar = Calendar.getInstance();
+
+        for (int j = 0; j < 7; j++) {
+            calendar.add(Calendar.DAY_OF_MONTH, j);
+            DoctorProfileAndCalendar.Day day = new DoctorProfileAndCalendar.Day(new com.jellsoft.mobile.docfin.model.Date(calendar.getTime()));
+            for (int i = 0; i < 10; i++) {
+                day.addSlot(new DoctorProfileAndCalendar.Day.Slot(
+                        i < 4 ? String.valueOf(i + 9) : String.valueOf(i - 3), i < 4 ?
+                        DoctorProfileAndCalendar.Day.Slot.PartOfDay.AM : DoctorProfileAndCalendar.Day.Slot.PartOfDay.PM));
+            }
+            d.addDay(day);
         }
-        DoctorProfileAndCalendar d = new DoctorProfileAndCalendar(this.doc1, profile, calendar);
+
         return d;
     }
 

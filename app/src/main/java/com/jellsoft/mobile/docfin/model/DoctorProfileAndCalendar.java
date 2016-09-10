@@ -12,34 +12,55 @@ public class DoctorProfileAndCalendar {
 
     private final Profile profile;
 
-    private final Calendar calendar;
+    private final List<Day> calendar = new ArrayList<>();
 
-    public DoctorProfileAndCalendar(DoctorCard doctorCard, Profile profile, Calendar calendar) {
+    public DoctorProfileAndCalendar(DoctorCard doctorCard, Profile profile) {
         this.doctorCard = doctorCard;
         this.profile = profile;
-        this.calendar = calendar;
     }
 
-    public static class Calendar
+    public DoctorProfileAndCalendar addDay(Day day)
     {
-        private final Date day;
+        this.calendar.add(day);
+        return this;
+    }
+
+    public DoctorCard getDoctorCard() {
+        return doctorCard;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public List<Day> getCalendar() {
+        return calendar;
+    }
+
+    public static class Day
+    {
+        public final Date date;
 
         private List<Slot> slots = new ArrayList<>();
 
-        public Calendar(Date day) {
-            this.day = day;
+        public Day(Date day) {
+            this.date = day;
         }
 
-        public Calendar addSlot(Slot slot)
+        public Day addSlot(Slot slot)
         {
             this.slots.add(slot);
             return this;
         }
 
-        public Calendar addSlots(List<Slot> slots)
+        public Day addSlots(List<Slot> slots)
         {
             this.slots.addAll(slots);
             return this;
+        }
+
+        public List<Slot> getSlots() {
+            return slots;
         }
 
         public static class Slot
