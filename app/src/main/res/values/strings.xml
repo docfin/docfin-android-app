@@ -24,4 +24,5 @@
 
     <string name="network_call_error">Unexpected network connectivity error.</string>
     <string name="no_network_connection">Cannot perform the function as there is no network connection.</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -42,14 +42,11 @@ public class SearchResultsActivity extends BaseDocfinActivity {
         mAdapter = new DoctorCardRecyclerViewAdapter(searchResults);
         mRecyclerView.setAdapter(mAdapter);
 
-        ImageView backLabel = (ImageView) findViewById(R.id.toolbar_back_image);
-        backLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        addToolbarBackEventListener();
+        addToolbarMapEventListener();
     }
+
+
 
     protected class DoctorCardRecyclerViewHolder extends RecyclerView.ViewHolder {
 
