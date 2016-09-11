@@ -8,6 +8,7 @@ import android.support.annotation.Size;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,14 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_appointment);
 
+        ImageView backLabel = (ImageView) findViewById(R.id.toolbar_back_image);
+        backLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         TabHost host = (TabHost) findViewById(R.id.docDetailsTabHost);
         host.setup();
 
@@ -62,7 +71,10 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String s) {
-                //TODO
+                if("Profile".equals(s))
+                {
+                    setProfile();
+                }
             }
         });
 
@@ -81,8 +93,6 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         mAdapter = new AppointmentCalendarRecyclerViewAdapter(this.profileAndCalendar.getCalendar());
         mRecyclerView.setAdapter(mAdapter);
 
-        ScrollView mainScrollView = (ScrollView) findViewById(R.id.bookAppointmentMainScrollView);
-        mainScrollView.fullScroll(ScrollView.FOCUS_UP);
     }
 
     private void setDocHeader() {
@@ -104,6 +114,14 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         ((TextView) findViewById(R.id.docAddrLine)).setText(this.doctorCard.getAddress1() + ", " + this.doctorCard.getAddress2());
     }
 
+    private void setProfile()
+    {
+        ((TextView) findViewById(R.id.cv)).setText(this.profileAndCalendar.getProfile().cv);
+        ((TextView) findViewById(R.id.education)).setText(this.profileAndCalendar.getProfile().education);
+        ((TextView) findViewById(R.id.certifications)).setText(this.profileAndCalendar.getProfile().certifications);
+        ((TextView) findViewById(R.id.languages)).setText(this.profileAndCalendar.getProfile().languages);
+    }
+
     protected class AppointmentCalendarRecyclerView extends RecyclerView.ViewHolder {
 
         private CardView calendarCard;
@@ -117,16 +135,15 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         public void bindDay(DoctorProfileAndCalendar.Day day) {
             this.day = day;
             ((TextView) calendarCard.findViewById(R.id.appointmentDate)).setText(this.day.date.toString());
+            FlowLayout ll = (FlowLayout) this.calendarCard.findViewById(R.id.timeSlotsLayout);
+            ll.removeAllViewsInLayout();
             for (int i = 0; i < this.day.getSlots().size(); i++) {
-
                 Button myButton = new Button(getApplicationContext());
                 myButton.setText(this.day.getSlots().get(i).toString());
                 myButton.setBackground(getDrawable(R.drawable.button_layout_rounded));
                 myButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 myButton.setTextColor(Color.WHITE);
                 myButton.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-
-                FlowLayout ll = (FlowLayout) this.calendarCard.findViewById(R.id.timeSlotsLayout);
                 FlowLayout.LayoutParams lp = new FlowLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 lp.setMargins(5, 5, 5, 5);
                 ll.addView(myButton, lp);
@@ -153,11 +170,13 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
 
         @Override
         public void onBindViewHolder(AppointmentCalendarRecyclerView holder, int position) {
+            Log.d("Calendar Days", "No of slots " + this.data.get(position).getSlots().size() + " for position " + position);
             holder.bindDay(this.data.get(position));
         }
 
         @Override
         public int getItemCount() {
+            Log.d("Calendar Days", "No of days " + this.data.size());
             return this.data == null ? 0 : this.data.size();
         }
     }

@@ -22,6 +22,7 @@
             android:layout_gravity="center"
             android:textSize="16dp"
             android:textStyle="bold"
+            android:layout_marginBottom="5dp"
             />
 
         <org.apmem.tools.layouts.FlowLayout

@@ -12,152 +12,240 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/bookAppointmentMainScrollView">
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical">
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="100dp"
-                        android:paddingRight="70dp">
-
-                        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:id="@+id/docImage"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/shape_oval"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/doctor_placeholder" />
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingLeft="100dp"
+                    android:paddingRight="70dp">
 
                     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/docIsFavoriteStatus"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="top"
-                        android:src="@drawable/ic_action_heart_outline" />
-
+                        android:id="@+id/docImage"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shape_oval"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/doctor_placeholder" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/docNameAndTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:text="Dr. Sonia Oberoi, MD, FAAD"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-
-                    />
-
-                <TextView
-                    android:id="@+id/docSpeciality"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:paddingTop="5dp"
-                    android:text="Cardiologist"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/docAddrLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:paddingTop="5dp"
-                    android:text="503 Raritan Ave., Highland Park, NJ 08904"
-                    android:textSize="12dp" />
+                <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/docIsFavoriteStatus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top"
+                    android:src="@drawable/ic_action_heart_outline" />
 
             </LinearLayout>
 
-            <TabHost
-                android:id="@+id/docDetailsTabHost"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/docNameAndTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="Dr. Sonia Oberoi, MD, FAAD"
+                android:textSize="14dp"
+                android:textStyle="bold"
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                />
 
-                    <TabWidget
-                        android:id="@android:id/tabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"></TabWidget>
+            <TextView
+                android:id="@+id/docSpeciality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:paddingTop="5dp"
+                android:text="Cardiologist"
+                android:textSize="14dp" />
 
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-
-                        <ScrollView
-                            android:id="@+id/scheduleTabView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:id="@+id/availableDatesRecycleView"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@android:color/white"
-                                    android:paddingLeft="5dp"
-                                    android:paddingRight="5dp"
-                                    android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
-                            </LinearLayout>
-                        </ScrollView>
-
-                        <ScrollView
-                            android:id="@+id/doctorProfileTabView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                            </LinearLayout>
-
-                        </ScrollView>
-
-                    </FrameLayout>
-                </LinearLayout>
-            </TabHost>
+            <TextView
+                android:id="@+id/docAddrLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:paddingTop="5dp"
+                android:text="503 Raritan Ave., Highland Park, NJ 08904"
+                android:textSize="12dp" />
 
         </LinearLayout>
 
-    </ScrollView>
+
+        <TabHost
+            android:id="@+id/docDetailsTabHost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/scheduleTabView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/availableDatesRecycleView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/white"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/doctorProfileTabView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                    <ScrollView
+                        android:id="@+id/doctorProfileTabViewScroller"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/cvLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:text="Career Highlights"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/cv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:lineSpacingExtra="3dp"
+                                android:text="Curriculum Vitae"
+                                android:textColor="@android:color/black"
+                                android:textSize="14dp" />
+
+
+                            <TextView
+                                android:id="@+id/educationLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="10dp"
+                                android:text="Education"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/education"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:lineSpacingExtra="3dp"
+                                android:text=""
+                                android:textColor="@android:color/black"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/certificationsLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="10dp"
+                                android:text="Board Certifications"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/certifications"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:lineSpacingExtra="3dp"
+                                android:text=""
+                                android:textColor="@android:color/black"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/languagesLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="10dp"
+                                android:text="Languages"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/languages"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="20dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:lineSpacingExtra="3dp"
+                                android:text=""
+                                android:textColor="@android:color/black"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </ScrollView>
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
 </LinearLayout>
