@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
+import com.jellsoft.mobile.docfin.model.MapAddress;
 import com.jellsoft.mobile.docfin.transform.CircularTransformation;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultsActivity extends BaseDocfinActivity {
@@ -43,9 +45,18 @@ public class SearchResultsActivity extends BaseDocfinActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         addToolbarBackEventListener();
-        addToolbarMapEventListener();
+        addToolbarMapEventListener(getMapAddresses(searchResults));
     }
 
+    private ArrayList<MapAddress> getMapAddresses(List<DoctorCard> doctorCards)
+    {
+        ArrayList addresses = new ArrayList();
+        for(DoctorCard dc: doctorCards)
+        {
+            addresses.add(new MapAddress(dc.fullAddress(), dc.getNameAndTitle(), dc.getImageURL()));
+        }
+        return addresses;
+    }
 
 
     protected class DoctorCardRecyclerViewHolder extends RecyclerView.ViewHolder {

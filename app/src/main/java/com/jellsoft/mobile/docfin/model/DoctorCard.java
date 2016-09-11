@@ -73,4 +73,9 @@ public class DoctorCard implements Serializable{
     public void toggleFavoriteStatus() {
         this.favorite = !this.favorite;
     }
+
+    public String fullAddress()
+    {
+        return this.address1 + ", " + this.address2;
+    }
 }
