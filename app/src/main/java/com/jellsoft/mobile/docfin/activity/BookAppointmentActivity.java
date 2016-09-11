@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Size;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -71,8 +69,7 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String s) {
-                if("Profile".equals(s))
-                {
+                if ("Profile".equals(s)) {
                     setProfile();
                 }
             }
@@ -84,6 +81,19 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         this.doctorCard = (DoctorCard) intent.getSerializableExtra(IntentConstants.BOOK_APPOINTMENT_DOCTOR_CARD);
         this.profileAndCalendar = new MockDoctorSearchService().getDoctorProfileAndCalendar(new Date(), this.doctorCard.getDocId());
         this.setDocHeader();
+
+        findViewById(R.id.docIsFavoriteStatus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (doctorCard.isFavorite()) {
+                    ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart);
+                } else {
+                    ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart_outline);
+                }
+                doctorCard.toggleFavoriteStatus();
+            }
+        });
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.availableDatesRecycleView);
 
@@ -114,8 +124,7 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         ((TextView) findViewById(R.id.docAddrLine)).setText(this.doctorCard.getAddress1() + ", " + this.doctorCard.getAddress2());
     }
 
-    private void setProfile()
-    {
+    private void setProfile() {
         ((TextView) findViewById(R.id.cv)).setText(this.profileAndCalendar.getProfile().cv);
         ((TextView) findViewById(R.id.education)).setText(this.profileAndCalendar.getProfile().education);
         ((TextView) findViewById(R.id.certifications)).setText(this.profileAndCalendar.getProfile().certifications);
@@ -170,13 +179,11 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
 
         @Override
         public void onBindViewHolder(AppointmentCalendarRecyclerView holder, int position) {
-            Log.d("Calendar Days", "No of slots " + this.data.get(position).getSlots().size() + " for position " + position);
             holder.bindDay(this.data.get(position));
         }
 
         @Override
         public int getItemCount() {
-            Log.d("Calendar Days", "No of days " + this.data.size());
             return this.data == null ? 0 : this.data.size();
         }
     }

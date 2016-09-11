@@ -83,6 +83,7 @@ public class SearchResultsActivity extends BaseDocfinActivity {
         }
 
         public void toggleFavoriteStatus(View view) {
+            //TODO: remove this? user can only heart from bookappointment tab
             if (this.doctorCard.isFavorite()) {
                 ((ImageView) view).setImageResource(R.drawable.ic_action_heart_outline);
             } else {
