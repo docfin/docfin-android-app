@@ -17,11 +17,14 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
@@ -130,16 +133,17 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
         /*LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
         //mMap.clear();
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (Address address : this.addresses) {
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title(mAddressMap.get(address).title));
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+            mMap.addMarker(markerOptions.title(mAddressMap.get(address).title));
+            builder.include(latLng);
         }
-
-        if (this.cameraLocation != null) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(this.cameraLocation.getLatitude(), this.cameraLocation.getLongitude())));
-        } else if (mLastLocation != null) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())));
-        }
+        LatLngBounds bounds = builder.build();
+        int padding = 28;
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        mMap.animateCamera(cu);
     }
 
     @Override
