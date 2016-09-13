@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import com.jellsoft.mobile.docfin.R;
+import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.MapAddress;
 
@@ -46,13 +47,13 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         });
     }
 
-    protected void addToolbarMapEventListener(final ArrayList<MapAddress> addresses) {
+    protected void addToolbarMapEventListener(final ArrayList<DoctorCard> doctorCards) {
         ImageView mapIcon = (ImageView) findViewById(R.id.toolbar_sr_map);
         mapIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                intent.putExtra(IntentConstants.MAPS_ADDRESSES, addresses);
+                intent.putExtra(IntentConstants.MAPS_ADDRESSES, doctorCards);
                 startActivity(intent);
             }
         });

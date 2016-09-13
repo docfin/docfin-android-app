@@ -23,11 +23,12 @@ public class DoctorCard implements Serializable{
 
     private final String imageURL;
 
-    public DoctorCard(String nameAndTitle, String speciality, String address1, String address2, double distance, String imageURL) {
-        this(nameAndTitle, nameAndTitle, speciality, address1, address2, false, distance, imageURL);
-    }
+    private final double lat;
+    private final double lng;
 
-    public DoctorCard(String docId, String nameAndTitle, String speciality, String address1, String address2, boolean favorite, double distance, String imageURL) {
+
+    public DoctorCard(String docId, String nameAndTitle, String speciality, String address1,
+                      String address2, boolean favorite, double distance, String imageURL, double lat, double lng) {
         this.docId = docId;
         this.nameAndTitle = nameAndTitle;
         this.speciality = speciality;
@@ -36,6 +37,8 @@ public class DoctorCard implements Serializable{
         this.favorite = favorite;
         this.distance = distance;
         this.imageURL = imageURL;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public String getNameAndTitle() {
@@ -77,5 +80,13 @@ public class DoctorCard implements Serializable{
     public String fullAddress()
     {
         return this.address1 + ", " + this.address2;
+    }
+
+    public double getLatitude() {
+        return lat;
+    }
+
+    public double getLongitude() {
+        return lng;
     }
 }

@@ -11,6 +11,7 @@ public class MapAddress implements Serializable {
     public final String iconUrl;
     public final String title;
 
+
     public MapAddress(String address, String title, String iconUrl) {
         this.address = address;
         this.title = title;

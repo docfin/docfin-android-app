@@ -45,19 +45,8 @@ public class SearchResultsActivity extends BaseDocfinActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         addToolbarBackEventListener();
-        addToolbarMapEventListener(getMapAddresses(searchResults));
+        addToolbarMapEventListener((ArrayList<DoctorCard>) searchResults);
     }
-
-    private ArrayList<MapAddress> getMapAddresses(List<DoctorCard> doctorCards)
-    {
-        ArrayList addresses = new ArrayList();
-        for(DoctorCard dc: doctorCards)
-        {
-            addresses.add(new MapAddress(dc.fullAddress(), dc.getNameAndTitle(), dc.getImageURL()));
-        }
-        return addresses;
-    }
-
 
     protected class DoctorCardRecyclerViewHolder extends RecyclerView.ViewHolder {
 

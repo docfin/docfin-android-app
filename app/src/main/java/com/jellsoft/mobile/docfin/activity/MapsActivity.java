@@ -4,8 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,9 +22,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.jellsoft.mobile.docfin.R;
+import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.MapAddress;
 
@@ -40,17 +38,16 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
 
-    private Map<Address, MapAddress> mAddressMap = new HashMap<>();
-
-    private List<Address> addresses = new ArrayList<>();
-    private Address cameraLocation;
+    private List<DoctorCard> addresses = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        long start = System.currentTimeMillis();
+        Log.d("MapsActivity", "#####onCreate");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -64,14 +61,13 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
                     .addApi(LocationServices.API)
                     .build();
         }
-
         this.addresses.clear();
-        this.mAddressMap.clear();
         Intent intent = getIntent();
-        List<MapAddress> addresses = (List<MapAddress>) intent.getSerializableExtra(IntentConstants.MAPS_ADDRESSES);
-        String cameraLocationStr = intent.getStringExtra(IntentConstants.MAPS_CAMERA_LOCATION);
-        this.cameraLocation = resolveAddress(cameraLocationStr);
-        this.resolveAddresses(addresses);
+        this.addresses.addAll((List<DoctorCard>) intent.getSerializableExtra(IntentConstants.MAPS_ADDRESSES));
+
+        long end = System.currentTimeMillis();
+
+        Log.d("MapsActivity", "#####onCreate load time " + (end - start) / 1000);
 
     }
 
@@ -85,34 +81,6 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
-    }
-
-    private void resolveAddresses(List<MapAddress> addresses) {
-        if (addresses != null) {
-            for (MapAddress add : addresses) {
-                Address resolvedAddress = this.resolveAddress(add.address);
-                if (resolvedAddress != null) {
-                    this.addresses.add(resolvedAddress);
-                    mAddressMap.put(resolvedAddress, add);
-                }
-            }
-        }
-    }
-
-    private Address resolveAddress(String strAddress) {
-        Geocoder coder = new Geocoder(this);
-        List<Address> address;
-        try {
-            address = coder.getFromLocationName(strAddress, 1);
-            if (address == null || address.size() == 0) {
-                return null;
-            }
-            Address location = address.get(0);
-            return location;
-        } catch (Exception e) {
-            Log.e("MapsActivity", "Couldn't locate address " + strAddress + e.getMessage());
-            return null;
-        }
     }
 
 
@@ -129,19 +97,17 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
-        //mMap.clear();
+        Log.d("MapsActivity", "mapReady");
+
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Address address : this.addresses) {
+        for (DoctorCard address : this.addresses) {
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions().position(latLng);
-            mMap.addMarker(markerOptions.title(mAddressMap.get(address).title));
+            mMap.addMarker(markerOptions.title(address.getNameAndTitle()));
             builder.include(latLng);
         }
         LatLngBounds bounds = builder.build();
-        int padding = 28;
+        int padding = 50;
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         mMap.animateCamera(cu);
     }
@@ -154,8 +120,7 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
             }
             return;
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
+        LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
     }
 
     @Override
@@ -167,8 +132,7 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
-                mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                        mGoogleApiClient);
+                LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             }
         }
     }
