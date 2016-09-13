@@ -99,17 +99,23 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
 
         Log.d("MapsActivity", "mapReady");
 
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        final LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (DoctorCard address : this.addresses) {
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions().position(latLng);
             mMap.addMarker(markerOptions.title(address.getNameAndTitle()));
             builder.include(latLng);
         }
-        LatLngBounds bounds = builder.build();
-        int padding = 50;
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        mMap.animateCamera(cu);
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                LatLngBounds bounds = builder.build();
+                int padding = 50;
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                mMap.animateCamera(cu);
+            }
+        });
+
     }
 
     @Override
