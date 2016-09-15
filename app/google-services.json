@@ -1,0 +1,61 @@
+{
+  "project_info": {
+    "project_number": "360386953099",
+    "project_id": "docfin-9244"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360386953099:android:65dd2bf65c67c98b",
+        "android_client_info": {
+          "package_name": "com.jellsoft.docfin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtJ1b4cutRcbMHMYbhjfx0yU3OiXPjgQ0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360386953099:android:7150e84c2a8f0bfd",
+        "android_client_info": {
+          "package_name": "com.jellsoft.mobile.docfin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtJ1b4cutRcbMHMYbhjfx0yU3OiXPjgQ0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
