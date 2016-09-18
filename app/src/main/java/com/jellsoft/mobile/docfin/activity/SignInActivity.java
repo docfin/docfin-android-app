@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jellsoft.mobile.docfin.R;
+import com.jellsoft.mobile.docfin.model.IntentConstants;
 
 
 public class SignInActivity extends BaseDocfinActivity implements
@@ -119,10 +120,10 @@ public class SignInActivity extends BaseDocfinActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            updateUI(true);
+            doOnSignedIn(result);
         } else {
             // Signed out, show unauthenticated UI.
-            updateUI(false);
+            doOnSignedOut();
         }
     }
     // [END handleSignInResult]
@@ -141,7 +142,7 @@ public class SignInActivity extends BaseDocfinActivity implements
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        updateUI(false);
+                        doOnSignedOut();
                         // [END_EXCLUDE]
                     }
                 });
@@ -155,7 +156,7 @@ public class SignInActivity extends BaseDocfinActivity implements
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        updateUI(false);
+                        doOnSignedOut();
                         // [END_EXCLUDE]
                     }
                 });
@@ -185,15 +186,15 @@ public class SignInActivity extends BaseDocfinActivity implements
         }
     }
 
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
+    private void doOnSignedIn(GoogleSignInResult result) {
+        findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+        Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
+        registerUserIntent.putExtra(IntentConstants.SIGN_IN_ACCOUNT,  result.getSignInAccount());
+        startActivity(registerUserIntent);
+    }
 
-
-        } else {
-            mStatusTextView.setText(R.string.singin_with_google);
-        }
+    private void doOnSignedOut() {
+        mStatusTextView.setText(R.string.singin_with_google);
     }
 
     @Override

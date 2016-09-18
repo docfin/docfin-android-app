@@ -12,6 +12,7 @@ public class IntentConstants {
     public static final int REQUEST_PERMISSION_LOCATION = 10000;
     public static final String BOOK_APPOINTMENT_DOCTOR_CARD = "BOOK_APPOINTMENT_DOCTOR_CARD";
     public static final String MAPS_CAMERA_LOCATION = "MAPS_CAMERA_LOCATION";
+    public static final String SIGN_IN_ACCOUNT = "com.jellsoft.mobile.docfin.SignInAccount";
 
     private IntentConstants(){}
 

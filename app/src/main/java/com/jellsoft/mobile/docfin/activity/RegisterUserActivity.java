@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
@@ -13,6 +15,11 @@ import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
 public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener {
+
+    private EditText firstName;
+    private EditText lastName;
+    private EditText emailId;
+    private EditText insuranceId;
 
     private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
 
@@ -27,15 +34,25 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-        findViewById(R.id.insuranceId).clearFocus();
-        findViewById(R.id.firstName).requestFocus();
-        this.closeKeyboard();
+        this.insuranceId = (EditText) findViewById(R.id.insuranceId);
+        this.firstName = (EditText) findViewById(R.id.firstName);
+        this.lastName = (EditText) findViewById(R.id.lastName);
+        this.emailId = (EditText) findViewById(R.id.lastName);
 
-        findViewById(R.id.firstName).setOnClickListener(this);
-        findViewById(R.id.lastName).setOnClickListener(this);
-        findViewById(R.id.emailId).setOnClickListener(this);
+        this.insuranceId.requestFocus();
+
+        this.firstName.setOnClickListener(this);
+        this.lastName.setOnClickListener(this);
+        this.emailId.setOnClickListener(this);
+
+        Intent intent = getIntent();
+
+        GoogleSignInAccount userAccount = intent.getExtras().getParcelable(IntentConstants.SIGN_IN_ACCOUNT);
+
+        this.firstName.setText(userAccount.getGivenName());
+        this.lastName.setText(userAccount.getFamilyName());
+        this.emailId.setText(userAccount.getEmail());
     }
-
 
     public void registerUser(View view) {
         //view is the button.
@@ -50,7 +67,7 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
 
     private void clearErrorMessages() {
         this.errorMessages.reset();
-        ((EditText) findViewById(R.id.firstName)).setError(null);
+        this.firstName.setError(null);
         ((EditText) findViewById(R.id.lastName)).setError(null);
         ((EditText) findViewById(R.id.emailId)).setError(null);
         ((EditText) findViewById(R.id.insuranceId)).setError(null);
