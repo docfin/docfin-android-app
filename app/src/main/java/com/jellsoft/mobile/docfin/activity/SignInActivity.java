@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -123,6 +124,7 @@ public class SignInActivity extends BaseDocfinActivity implements
             doOnSignedIn(result);
         } else {
             // Signed out, show unauthenticated UI.
+            Toast.makeText(getApplicationContext(), "Failed to sign in with your google account!", Toast.LENGTH_SHORT).show();
             doOnSignedOut();
         }
     }

@@ -54,4 +54,5 @@
 
     <!-- Content Description for images -->
     <string name="desc_google_icon">Google Logo</string>
+    <string name="server_client_id">360386953099-lepb0svunt4vpl3vs1r8c6sqn7jha91t.apps.googleusercontent.com</string>
 </resources>

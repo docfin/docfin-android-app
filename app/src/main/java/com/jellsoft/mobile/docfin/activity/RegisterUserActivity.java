@@ -37,9 +37,9 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.insuranceId = (EditText) findViewById(R.id.insuranceId);
         this.firstName = (EditText) findViewById(R.id.firstName);
         this.lastName = (EditText) findViewById(R.id.lastName);
-        this.emailId = (EditText) findViewById(R.id.lastName);
+        this.emailId = (EditText) findViewById(R.id.emailId);
 
-        this.insuranceId.requestFocus();
+        this.firstName.requestFocus();
 
         this.firstName.setOnClickListener(this);
         this.lastName.setOnClickListener(this);

@@ -11,7 +11,12 @@
           "package_name": "com.jellsoft.docfin"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "360386953099-f7acbodn9l35pob4rokd8nh8d9khpt90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDtJ1b4cutRcbMHMYbhjfx0yU3OiXPjgQ0"
@@ -37,7 +42,20 @@
           "package_name": "com.jellsoft.mobile.docfin"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "360386953099-lepb0svunt4vpl3vs1r8c6sqn7jha91t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jellsoft.mobile.docfin",
+            "certificate_hash": "5B16B7F7F3BEC970D8C76AEBE48006741A097D2B"
+          }
+        },
+        {
+          "client_id": "360386953099-f7acbodn9l35pob4rokd8nh8d9khpt90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDtJ1b4cutRcbMHMYbhjfx0yU3OiXPjgQ0"
