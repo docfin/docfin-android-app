@@ -3,7 +3,6 @@ package com.jellsoft.mobile.docfin.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,12 +25,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
-import com.jellsoft.mobile.docfin.model.MapAddress;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ActivityCompat.OnRequestPermissionsResultCallback {

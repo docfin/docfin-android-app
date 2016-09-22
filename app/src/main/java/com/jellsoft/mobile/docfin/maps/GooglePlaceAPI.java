@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.network.URLConnector;
 import com.jellsoft.mobile.docfin.json.DocfinJsonParser;
 import com.jellsoft.mobile.docfin.util.UIUtil;
@@ -36,7 +37,7 @@ public class GooglePlaceAPI {
         String jsonResults = "";
 
         String googlePlaceURL = Uri.parse(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON).buildUpon()
-                .appendQueryParameter("key", API_KEY)
+                .appendQueryParameter("key", context.getString(R.string.google_maps_key))
                 .appendQueryParameter("types", "geocode")
                 .appendQueryParameter("input" , input).build().toString();
 

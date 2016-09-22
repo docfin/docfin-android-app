@@ -5,16 +5,22 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
+import com.jellsoft.mobile.docfin.model.realm.User;
+import com.jellsoft.mobile.docfin.service.MockUserRegistrationService;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
+import io.realm.Realm;
+
 public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener {
+
+    Realm realm;
 
     private EditText firstName;
     private EditText lastName;
@@ -34,6 +40,8 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
+        realm = Realm.getDefaultInstance();
+
         this.insuranceId = (EditText) findViewById(R.id.insuranceId);
         this.firstName = (EditText) findViewById(R.id.firstName);
         this.lastName = (EditText) findViewById(R.id.lastName);
@@ -52,6 +60,7 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.firstName.setText(userAccount.getGivenName());
         this.lastName.setText(userAccount.getFamilyName());
         this.emailId.setText(userAccount.getEmail());
+
     }
 
     public void registerUser(View view) {
@@ -60,9 +69,46 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.clearErrorMessages();
         validateUserRegistrationFields();
         if (errorMessages.hasNoErrors()) {
-            Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
-            startActivity(intent);
+            realm.executeTransactionAsync(
+                    new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            User user = realm.createObject(User.class);
+                            user.setEmail(emailId.getText().toString());
+                            user.setFirstName(firstName.getText().toString());
+                            user.setLastName(lastName.getText().toString());
+                            String[] insurance = insuranceId.getText().toString().split(",");
+                            user.setInsuranceProvider(insurance[0]);
+                            user.setInsurancePlan(insurance[1]);
+                            //TODO register on server.
+                            new MockUserRegistrationService().registerUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getInsuranceProvider(), user.getInsurancePlan());
+                        }
+                    }
+                    , new Realm.Transaction.OnSuccess() {
+                        @Override
+                        public void onSuccess() {
+                            doOnRegistrationSuccess();
+                        }
+                    }, new Realm.Transaction.OnError() {
+                        @Override
+                        public void onError(Throwable error) {
+                            doOnRegistrationFailed();
+                        }
+                    });
+
+
         }
+    }
+
+
+    private void doOnRegistrationSuccess() {
+        Toast.makeText(getApplicationContext(), "Registration successful! Happy doctor hunting", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
+        startActivity(intent);
+    }
+
+    private void doOnRegistrationFailed() {
+        Toast.makeText(getApplicationContext(), "Yikes, something went wrong with registration. Try again", Toast.LENGTH_LONG).show();
     }
 
     private void clearErrorMessages() {

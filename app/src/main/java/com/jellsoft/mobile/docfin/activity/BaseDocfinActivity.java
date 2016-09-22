@@ -12,10 +12,8 @@ import android.widget.ImageView;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
-import com.jellsoft.mobile.docfin.model.MapAddress;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by atulanand on 8/17/16.
