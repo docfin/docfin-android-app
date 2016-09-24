@@ -15,10 +15,15 @@ import com.jellsoft.mobile.docfin.model.IntentConstants;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 /**
  * Created by atulanand on 8/17/16.
  */
 public abstract class BaseDocfinActivity extends AppCompatActivity {
+
+    Realm realm;
+
 
     public void closeKeyboard()
     {
@@ -27,6 +32,18 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    protected void startDoctorSearchActivity() {
+        Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
+        startActivity(intent);
+    }
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.realm = Realm.getDefaultInstance();
     }
 
     @Override

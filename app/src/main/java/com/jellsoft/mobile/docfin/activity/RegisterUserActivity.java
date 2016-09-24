@@ -3,6 +3,7 @@ package com.jellsoft.mobile.docfin.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,8 +20,6 @@ import com.jellsoft.mobile.docfin.util.ValidateInput;
 import io.realm.Realm;
 
 public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener {
-
-    Realm realm;
 
     private EditText firstName;
     private EditText lastName;
@@ -40,7 +39,7 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-        realm = Realm.getDefaultInstance();
+
 
         this.insuranceId = (EditText) findViewById(R.id.insuranceId);
         this.firstName = (EditText) findViewById(R.id.firstName);
@@ -92,6 +91,7 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
                     }, new Realm.Transaction.OnError() {
                         @Override
                         public void onError(Throwable error) {
+                            Log.e("RegisterUserActivity", "Failed to register User:" ,error);
                             doOnRegistrationFailed();
                         }
                     });
@@ -103,9 +103,9 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
 
     private void doOnRegistrationSuccess() {
         Toast.makeText(getApplicationContext(), "Registration successful! Happy doctor hunting", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getApplicationContext(), DoctorSearchActivity.class);
-        startActivity(intent);
+        startDoctorSearchActivity();
     }
+
 
     private void doOnRegistrationFailed() {
         Toast.makeText(getApplicationContext(), "Yikes, something went wrong with registration. Try again", Toast.LENGTH_LONG).show();

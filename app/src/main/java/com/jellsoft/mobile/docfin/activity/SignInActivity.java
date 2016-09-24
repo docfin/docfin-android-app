@@ -20,6 +20,10 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
+import com.jellsoft.mobile.docfin.model.realm.User;
+
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 
 public class SignInActivity extends BaseDocfinActivity implements
@@ -101,7 +105,7 @@ public class SignInActivity extends BaseDocfinActivity implements
         }
     }
 
-    // [START onActivityResult]
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,9 +116,7 @@ public class SignInActivity extends BaseDocfinActivity implements
             handleSignInResult(result);
         }
     }
-    // [END onActivityResult]
 
-    // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -128,16 +130,14 @@ public class SignInActivity extends BaseDocfinActivity implements
             doOnSignedOut();
         }
     }
-    // [END handleSignInResult]
 
-    // [START signIn]
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signIn]
 
-    // [START signOut]
+
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -149,9 +149,8 @@ public class SignInActivity extends BaseDocfinActivity implements
                     }
                 });
     }
-    // [END signOut]
 
-    // [START revokeAccess]
+
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -190,9 +189,20 @@ public class SignInActivity extends BaseDocfinActivity implements
 
     private void doOnSignedIn(GoogleSignInResult result) {
         findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-        Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
-        registerUserIntent.putExtra(IntentConstants.SIGN_IN_ACCOUNT,  result.getSignInAccount());
-        startActivity(registerUserIntent);
+        if(isAnExistingUser(result.getSignInAccount().getEmail()))
+        {
+            this.startDoctorSearchActivity();
+        }
+        else
+        {
+            Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
+            registerUserIntent.putExtra(IntentConstants.SIGN_IN_ACCOUNT, result.getSignInAccount());
+            startActivity(registerUserIntent);
+        }
+    }
+
+    private boolean isAnExistingUser(String email) {
+        return realm.where(User.class).equalTo("email", email).findAll().size() > 0;
     }
 
     private void doOnSignedOut() {
