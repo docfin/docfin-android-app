@@ -13,6 +13,8 @@ public class IntentConstants {
     public static final String BOOK_APPOINTMENT_DOCTOR_CARD = "BOOK_APPOINTMENT_DOCTOR_CARD";
     public static final String MAPS_CAMERA_LOCATION = "MAPS_CAMERA_LOCATION";
     public static final String SIGN_IN_ACCOUNT = "com.jellsoft.mobile.docfin.SignInAccount";
+    public static final String SIGN_OUT_USER = "com.jellsoft.mobile.docfin.SignOutUser";
+    public static final String GOOGLE_API_CLIENT = "GOOGLE_API_CLIENT";
 
     private IntentConstants(){}
 

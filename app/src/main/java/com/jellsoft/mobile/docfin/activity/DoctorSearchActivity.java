@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.jellsoft.mobile.docfin.DisplayPopupMenu;
+import com.jellsoft.mobile.docfin.popupmenu.PopupMenuManager;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
 import com.jellsoft.mobile.docfin.fragment.GooglePlaceSearchFragment;
@@ -32,7 +32,7 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_search);
-        findViewById(R.id.toolbar_main_menu).setOnClickListener(new DisplayPopupMenu());
+        findViewById(R.id.toolbar_main_menu).setOnClickListener(new PopupMenuManager());
         ((TextView) findViewById(R.id.toolbar_screen_title)).setText("Doctor Search");
 
 

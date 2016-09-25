@@ -22,9 +22,6 @@ import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.realm.User;
 
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-
 
 public class SignInActivity extends BaseDocfinActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -36,6 +33,7 @@ public class SignInActivity extends BaseDocfinActivity implements
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
+    private boolean signOutUser = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,36 +45,23 @@ public class SignInActivity extends BaseDocfinActivity implements
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        findViewById(R.id.sign_out_button).setOnClickListener(this);
 
-        // [START configure_signin]
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // [END configure_signin]
-
-        // [START build_client]
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        // [END build_client]
-
-        // [START customize_button]
-        // Customize sign-in button. The sign-in button can be displayed in
-        // multiple sizes and color schemes. It can also be contextually
-        // rendered based on the requested scopes. For example. a red button may
-        // be displayed when Google+ scopes are requested, but a white button
-        // may be displayed when only basic profile is requested. Try adding the
-        // Scopes.PLUS_LOGIN scope to the GoogleSignInOptions to see the
-        // difference.
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-        signInButton.setScopes(gso.getScopeArray());
-        // [END customize_button]
+        Intent intent = getIntent();
+        this.signOutUser = intent.getBooleanExtra(IntentConstants.SIGN_OUT_USER, false);
+        Log.d(TAG, "started with intent " + signOutUser + " googleAPIClient " + mGoogleApiClient);
+        if (mGoogleApiClient == null) {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
+            SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+            signInButton.setSize(SignInButton.SIZE_STANDARD);
+            signInButton.setScopes(gso.getScopeArray());
+        }
     }
 
     @Override
@@ -90,6 +75,7 @@ public class SignInActivity extends BaseDocfinActivity implements
             Log.d(TAG, "Got cached sign-in");
             GoogleSignInResult result = opr.get();
             handleSignInResult(result);
+
         } else {
             // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
@@ -105,7 +91,6 @@ public class SignInActivity extends BaseDocfinActivity implements
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -117,13 +102,26 @@ public class SignInActivity extends BaseDocfinActivity implements
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
+
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            doOnSignedIn(result);
+            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            if(this.signOutUser) {
+                findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+                findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+            }
+            else {
+                doOnSignedIn(result);
+            }
+
         } else {
             // Signed out, show unauthenticated UI.
             Toast.makeText(getApplicationContext(), "Failed to sign in with your google account!", Toast.LENGTH_SHORT).show();
@@ -139,13 +137,13 @@ public class SignInActivity extends BaseDocfinActivity implements
 
 
     private void signOut() {
+        Log.d(TAG, "Signing Out");
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        // [START_EXCLUDE]
+                        Log.d(TAG, "Signed Out status " + status.getStatusMessage());
                         doOnSignedOut();
-                        // [END_EXCLUDE]
                     }
                 });
     }
@@ -188,13 +186,9 @@ public class SignInActivity extends BaseDocfinActivity implements
     }
 
     private void doOnSignedIn(GoogleSignInResult result) {
-        findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-        if(isAnExistingUser(result.getSignInAccount().getEmail()))
-        {
+        if (isAnExistingUser(result.getSignInAccount().getEmail())) {
             this.startDoctorSearchActivity();
-        }
-        else
-        {
+        } else {
             Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
             registerUserIntent.putExtra(IntentConstants.SIGN_IN_ACCOUNT, result.getSignInAccount());
             startActivity(registerUserIntent);
@@ -206,6 +200,9 @@ public class SignInActivity extends BaseDocfinActivity implements
     }
 
     private void doOnSignedOut() {
+        findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+        findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+        this.signOutUser = false;
         mStatusTextView.setText(R.string.singin_with_google);
     }
 
@@ -214,6 +211,9 @@ public class SignInActivity extends BaseDocfinActivity implements
         switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
+                break;
+            case  R.id.sign_out_button:
+                signOut();
                 break;
         }
     }

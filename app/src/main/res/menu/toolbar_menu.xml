@@ -12,7 +12,15 @@
         >
     </item>
     <item
+        android:id="@+id/mi_my_doctors"
+        android:title="My Doctors">
+    </item>
+    <item
         android:id="@+id/mi_settings"
-        android:title="Settings">
+        android:title="My Account">
+    </item>
+    <item
+        android:id="@+id/mi_signout"
+        android:title="Sign Out">
     </item>
 </menu>
