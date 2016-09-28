@@ -1,32 +1,41 @@
-package com.jellsoft.mobile.docfin.model.realm;
+package com.jellsoft.mobile.docfin.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
+import java.io.Serializable;
 
 /**
- * Created by atulanand on 9/21/16.
+ * Created by atulanand on 9/27/16.
  */
-public class User extends RealmObject {
+public class User implements Serializable {
 
-    private String firstName;
-
-    private String lastName;
-
-    @PrimaryKey
     private String email;
-
+    private String firstName;
+    private String lastName;
     private String insuranceProvider;
-
     private String insurancePlan;
-
-    private boolean registered;
-
 
     public User() {
     }
 
-    public User(String email) {
+    public User(String email, String firstName, String lastName) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User(com.jellsoft.mobile.docfin.model.realm.User rUser)
+    {
+        this.email = rUser.getEmail();
+        this.firstName = rUser.getFirstName();
+        this.lastName = rUser.getLastName();
+        this.insuranceProvider = rUser.getInsuranceProvider();
+        this.insurancePlan = rUser.getInsurancePlan();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -46,14 +55,6 @@ public class User extends RealmObject {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getInsuranceProvider() {
         return insuranceProvider;
     }
@@ -68,13 +69,5 @@ public class User extends RealmObject {
 
     public void setInsurancePlan(String insurancePlan) {
         this.insurancePlan = insurancePlan;
-    }
-
-    public boolean isRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(boolean registered) {
-        this.registered = registered;
     }
 }

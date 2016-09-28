@@ -22,6 +22,8 @@ import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.realm.User;
 
+import io.realm.RealmResults;
+
 
 public class SignInActivity extends BaseDocfinActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -49,19 +51,17 @@ public class SignInActivity extends BaseDocfinActivity implements
 
         Intent intent = getIntent();
         this.signOutUser = intent.getBooleanExtra(IntentConstants.SIGN_OUT_USER, false);
-        Log.d(TAG, "started with intent " + signOutUser + " googleAPIClient " + mGoogleApiClient);
-        if (mGoogleApiClient == null) {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                    .build();
-            SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-            signInButton.setSize(SignInButton.SIZE_STANDARD);
-            signInButton.setScopes(gso.getScopeArray());
-        }
+        Log.d(TAG, "started with intent - signOutUser: " + signOutUser + " googleAPIClient " + mGoogleApiClient);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setScopes(gso.getScopeArray());
     }
 
     @Override
@@ -114,11 +114,10 @@ public class SignInActivity extends BaseDocfinActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            if(this.signOutUser) {
+            if (this.signOutUser) {
                 findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
                 findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 doOnSignedIn(result);
             }
 
@@ -137,12 +136,10 @@ public class SignInActivity extends BaseDocfinActivity implements
 
 
     private void signOut() {
-        Log.d(TAG, "Signing Out");
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        Log.d(TAG, "Signed Out status " + status.getStatusMessage());
                         doOnSignedOut();
                     }
                 });
@@ -186,25 +183,39 @@ public class SignInActivity extends BaseDocfinActivity implements
     }
 
     private void doOnSignedIn(GoogleSignInResult result) {
-        if (isAnExistingUser(result.getSignInAccount().getEmail())) {
-            this.startDoctorSearchActivity();
+        this.removeUserSession();
+        RealmResults<User> users = findExistingUsers(result.getSignInAccount().getEmail());
+        if (users.size() == 1) {
+            if (users.get(0).isRegistered()) {
+                this.startDoctorSearchActivity();
+                this.createNewSession(users.get(0));
+            } else {
+                User user = users.get(0);
+                this.createNewSession(user);
+                startUserRegistrationActivity(result);
+            }
         } else {
-            Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
-            registerUserIntent.putExtra(IntentConstants.SIGN_IN_ACCOUNT, result.getSignInAccount());
-            startActivity(registerUserIntent);
+            User user = this.createNewUser(result.getSignInAccount().getEmail());
+            this.createNewSession(user);
+            startUserRegistrationActivity(result);
         }
     }
 
-    private boolean isAnExistingUser(String email) {
-        return realm.where(User.class).equalTo("email", email).findAll().size() > 0;
+    private void startUserRegistrationActivity(GoogleSignInResult result) {
+        Intent registerUserIntent = new Intent(getApplicationContext(), RegisterUserActivity.class);
+        registerUserIntent.putExtra(IntentConstants.SIGN_IN_ACCOUNT, new com.jellsoft.mobile.docfin.model.User(result.getSignInAccount().getEmail(), result.getSignInAccount().getGivenName(), result.getSignInAccount().getFamilyName()));
+        startActivity(registerUserIntent);
     }
+
 
     private void doOnSignedOut() {
         findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         this.signOutUser = false;
         mStatusTextView.setText(R.string.singin_with_google);
+        this.removeUserSession();
     }
+
 
     @Override
     public void onClick(View v) {
@@ -212,7 +223,7 @@ public class SignInActivity extends BaseDocfinActivity implements
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case  R.id.sign_out_button:
+            case R.id.sign_out_button:
                 signOut();
                 break;
         }

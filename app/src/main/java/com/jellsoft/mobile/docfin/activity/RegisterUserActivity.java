@@ -3,12 +3,10 @@ package com.jellsoft.mobile.docfin.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
@@ -16,8 +14,6 @@ import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.model.realm.User;
 import com.jellsoft.mobile.docfin.service.MockUserRegistrationService;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
-
-import io.realm.Realm;
 
 public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener {
 
@@ -40,7 +36,6 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         setContentView(R.layout.activity_register_user);
 
 
-
         this.insuranceId = (EditText) findViewById(R.id.insuranceId);
         this.firstName = (EditText) findViewById(R.id.firstName);
         this.lastName = (EditText) findViewById(R.id.lastName);
@@ -54,12 +49,15 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
 
         Intent intent = getIntent();
 
-        GoogleSignInAccount userAccount = intent.getExtras().getParcelable(IntentConstants.SIGN_IN_ACCOUNT);
-
-        this.firstName.setText(userAccount.getGivenName());
-        this.lastName.setText(userAccount.getFamilyName());
-        this.emailId.setText(userAccount.getEmail());
-
+        if (intent.getSerializableExtra(IntentConstants.SIGN_IN_ACCOUNT) != null) {
+            com.jellsoft.mobile.docfin.model.User userAccount = (com.jellsoft.mobile.docfin.model.User) intent.getSerializableExtra(IntentConstants.SIGN_IN_ACCOUNT);
+            this.firstName.setText(userAccount.getFirstName());
+            this.lastName.setText(userAccount.getLastName());
+            this.emailId.setText(userAccount.getEmail());
+            if (userAccount.getInsuranceProvider() != null && userAccount.getInsurancePlan() != null) {
+                this.insuranceId.setText(userAccount.getInsuranceProvider() + ", " + userAccount.getInsurancePlan());
+            }
+        }
     }
 
     public void registerUser(View view) {
@@ -68,35 +66,22 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.clearErrorMessages();
         validateUserRegistrationFields();
         if (errorMessages.hasNoErrors()) {
-            realm.executeTransactionAsync(
-                    new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            User user = realm.createObject(User.class);
-                            user.setEmail(emailId.getText().toString());
-                            user.setFirstName(firstName.getText().toString());
-                            user.setLastName(lastName.getText().toString());
-                            String[] insurance = insuranceId.getText().toString().split(",");
-                            user.setInsuranceProvider(insurance[0]);
-                            user.setInsurancePlan(insurance[1]);
-                            //TODO register on server.
-                            new MockUserRegistrationService().registerUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getInsuranceProvider(), user.getInsurancePlan());
-                        }
-                    }
-                    , new Realm.Transaction.OnSuccess() {
-                        @Override
-                        public void onSuccess() {
-                            doOnRegistrationSuccess();
-                        }
-                    }, new Realm.Transaction.OnError() {
-                        @Override
-                        public void onError(Throwable error) {
-                            Log.e("RegisterUserActivity", "Failed to register User:" ,error);
-                            doOnRegistrationFailed();
-                        }
-                    });
-
-
+            String[] insurance = insuranceId.getText().toString().split(",");
+            String provider;
+            String plan;
+            if (insurance.length > 1) {
+                provider = insurance[0];
+                plan = insurance[1];
+            } else {
+                provider = "Self";
+                plan = "Cash";
+            }
+            User user = registerUserDetails(emailId.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), provider, plan);
+            //TODO register on server.
+            if (user != null) {
+                new MockUserRegistrationService().registerUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getInsuranceProvider(), user.getInsurancePlan());
+                doOnRegistrationSuccess();
+            }
         }
     }
 
