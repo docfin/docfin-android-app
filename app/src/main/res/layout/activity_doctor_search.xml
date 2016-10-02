@@ -70,20 +70,19 @@
                 android:id="@+id/docSearchLocLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="22dp"
                 android:text="Near Location:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <AutoCompleteTextView
-                android:id="@+id/docSearchLoc"
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:hint="Use my location"
+                android:id="@+id/docSearchLoc"
                 android:singleLine="true"
-                android:imeOptions="actionNext"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textIsSelectable="true"
+                style="@style/SmallFont"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"

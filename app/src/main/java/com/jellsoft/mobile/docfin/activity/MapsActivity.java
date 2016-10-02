@@ -117,9 +117,7 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                this.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, IntentConstants.REQUEST_PERMISSION_LOCATION);
-            }
+            requestAccessLocationPermission();
             return;
         }
         LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);

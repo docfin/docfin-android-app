@@ -1,7 +1,9 @@
 package com.jellsoft.mobile.docfin.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -137,6 +139,12 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
                     realm.delete(UserSession.class);
                 }
             });
+        }
+    }
+
+    protected void requestAccessLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, IntentConstants.REQUEST_PERMISSION_LOCATION);
         }
     }
 
