@@ -3,11 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.NewAppointmentActivity">
+    tools:context=".activity.NewAppointmentActivity"
+    android:orientation="vertical">
 
     <include
         layout="@layout/toolbar_with_back_n_title_view"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            layout="@layout/doctor_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appointment time: "
+                android:id="@+id/appointmentTimeLabel"
+                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9:30 AM on Mon, Oct 4, 2016"
+                android:id="@+id/appointmentTime"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
+
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>
