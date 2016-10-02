@@ -1,5 +1,6 @@
 package com.jellsoft.mobile.docfin.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +13,14 @@ public class DoctorProfileAndCalendar {
 
     private final Profile profile;
 
-    private final List<Day> calendar = new ArrayList<>();
+    private final ArrayList<Day> calendar = new ArrayList<>();
 
     public DoctorProfileAndCalendar(DoctorCard doctorCard, Profile profile) {
         this.doctorCard = doctorCard;
         this.profile = profile;
     }
 
-    public DoctorProfileAndCalendar addDay(Day day)
-    {
+    public DoctorProfileAndCalendar addDay(Day day) {
         this.calendar.add(day);
         return this;
     }
@@ -37,8 +37,7 @@ public class DoctorProfileAndCalendar {
         return calendar;
     }
 
-    public static class Day
-    {
+    public static class Day implements Serializable {
         public final Date date;
 
         private List<Slot> slots = new ArrayList<>();
@@ -47,14 +46,12 @@ public class DoctorProfileAndCalendar {
             this.date = day;
         }
 
-        public Day addSlot(Slot slot)
-        {
+        public Day addSlot(Slot slot) {
             this.slots.add(slot);
             return this;
         }
 
-        public Day addSlots(List<Slot> slots)
-        {
+        public Day addSlots(List<Slot> slots) {
             this.slots.addAll(slots);
             return this;
         }
@@ -63,30 +60,56 @@ public class DoctorProfileAndCalendar {
             return slots;
         }
 
-        public static class Slot
-        {
-            public final String time;
+        public static class Slot implements Serializable {
+            private final Day day;
 
-            public  final PartOfDay partOfDay;
+            private final int hour;
 
-            public Slot(String time, PartOfDay partOfDay) {
-                this.time = time;
-                this.partOfDay = partOfDay;
+            private final int minute;
+
+            private PartOfDay partOfDay;
+
+            public Slot(Day day, int hourOfDay, int minute) {
+                this.day = day;
+                this.hour = hourOfDay;
+                this.minute = minute;
+                this.setPartOfDay(this.hour);
             }
-            public enum PartOfDay
-            {
+
+            private void setPartOfDay(int i) {
+                this.partOfDay = i < 12 ?
+                        DoctorProfileAndCalendar.Day.Slot.PartOfDay.AM : DoctorProfileAndCalendar.Day.Slot.PartOfDay.PM;
+            }
+
+            public enum PartOfDay {
                 AM, PM
             }
 
             @Override
             public String toString() {
-                return time + " " + partOfDay;
+                return (this.hour == 12 ? this.hour : (this.hour % 12)) + (this.minute > 0 ? ":" + this.minute : "") + " " + partOfDay;
+            }
+
+            public Day getDay() {
+                return day;
+            }
+
+            public int getHour() {
+                return hour;
+            }
+
+            public int getMinute() {
+                return minute;
+            }
+
+            public PartOfDay getPartOfDay() {
+                return partOfDay;
             }
         }
 
     }
 
-    public static class Profile{
+    public static class Profile implements Serializable {
 
         public final String cv;
 

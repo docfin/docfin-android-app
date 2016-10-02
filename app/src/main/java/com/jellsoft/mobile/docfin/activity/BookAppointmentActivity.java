@@ -141,18 +141,28 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
             this.calendarCard = (CardView) cardItemView;
         }
 
-        public void bindDay(DoctorProfileAndCalendar.Day day) {
+        public void bindDay(final DoctorProfileAndCalendar.Day day) {
             this.day = day;
             ((TextView) calendarCard.findViewById(R.id.appointmentDate)).setText(this.day.date.toString());
             FlowLayout ll = (FlowLayout) this.calendarCard.findViewById(R.id.timeSlotsLayout);
             ll.removeAllViewsInLayout();
             for (int i = 0; i < this.day.getSlots().size(); i++) {
                 Button myButton = new Button(getApplicationContext());
-                myButton.setText(this.day.getSlots().get(i).toString());
+                final DoctorProfileAndCalendar.Day.Slot appointmentTimeSlot = this.day.getSlots().get(i);
+                myButton.setText(appointmentTimeSlot.toString());
                 myButton.setBackground(getDrawable(R.drawable.button_layout_rounded));
                 myButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                 myButton.setTextColor(Color.WHITE);
                 myButton.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                myButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), NewAppointmentActivity.class);
+                        intent.putExtra(IntentConstants.BOOK_APPOINTMENT_DOCTOR_CARD, doctorCard);
+                        intent.putExtra(IntentConstants.BOOK_APPOINTMENT_TIME, appointmentTimeSlot);
+                        startActivity(intent);
+                    }
+                });
                 FlowLayout.LayoutParams lp = new FlowLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 lp.setMargins(5, 5, 5, 5);
                 ll.addView(myButton, lp);

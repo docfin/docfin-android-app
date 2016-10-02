@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -42,8 +43,7 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        long start = System.currentTimeMillis();
-        Log.d("MapsActivity", "#####onCreate");
+        ((TextView)findViewById(R.id.toolbar_sr_title)).setText("Map View");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -60,10 +60,6 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
         this.addresses.clear();
         Intent intent = getIntent();
         this.addresses.addAll((List<DoctorCard>) intent.getSerializableExtra(IntentConstants.MAPS_ADDRESSES));
-
-        long end = System.currentTimeMillis();
-
-        Log.d("MapsActivity", "#####onCreate load time " + (end - start) / 1000);
 
     }
 

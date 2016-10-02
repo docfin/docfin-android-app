@@ -7,7 +7,7 @@
     tools:context="com.jellsoft.mobile.docfin.activity.MapsActivity">
 
     <include
-        layout="@layout/toolbar_maps_view"
+        layout="@layout/toolbar_with_back_n_title_view"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 

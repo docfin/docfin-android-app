@@ -67,10 +67,8 @@ public class MockDoctorSearchService implements DoctorSearchService {
         for (int j = 0; j < 7; j++) {
             calendar.add(Calendar.DAY_OF_MONTH, j);
             DoctorProfileAndCalendar.Day day = new DoctorProfileAndCalendar.Day(new com.jellsoft.mobile.docfin.model.Date(calendar.getTime()));
-            for (int i = 0; i < 10; i++) {
-                day.addSlot(new DoctorProfileAndCalendar.Day.Slot(
-                        i < 4 ? String.valueOf(i + 9) : String.valueOf(i - 3), i < 4 ?
-                        DoctorProfileAndCalendar.Day.Slot.PartOfDay.AM : DoctorProfileAndCalendar.Day.Slot.PartOfDay.PM));
+            for (int i = 9; i < 19; i++) {
+                day.addSlot(new DoctorProfileAndCalendar.Day.Slot(day, i, 0));
             }
             d.addDay(day);
         }
