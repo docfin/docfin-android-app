@@ -124,6 +124,14 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         return realm.where(User.class).equalTo("email", email).findAll();
     }
 
+    protected UserSession userSession() {
+        RealmResults<UserSession> results = this.realm.where(UserSession.class).findAll();
+        if (results.size() == 1) {
+            return results.get(0);
+        }
+        return null;
+    }
+
     protected UserSession createNewSession(final User user) {
         CopyToRealmTransaction<UserSession> transaction = new CopyToRealmTransaction<>(new UserSession(user, new Date()));
         realm.executeTransaction(transaction);
