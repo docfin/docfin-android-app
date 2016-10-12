@@ -80,7 +80,7 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
 
         this.doctorCard = (DoctorCard) intent.getSerializableExtra(IntentConstants.BOOK_APPOINTMENT_DOCTOR_CARD);
         this.profileAndCalendar = new MockDoctorSearchService().getDoctorProfileAndCalendar(new Date(), this.doctorCard.getDocId());
-        this.setDocHeader();
+        this.setDocHeader(this.doctorCard);
 
         findViewById(R.id.docIsFavoriteStatus).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,25 +103,6 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         mAdapter = new AppointmentCalendarRecyclerViewAdapter(this.profileAndCalendar.getCalendar());
         mRecyclerView.setAdapter(mAdapter);
 
-    }
-
-    private void setDocHeader() {
-        if (doctorCard.isFavorite()) {
-            ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart);
-        } else {
-            ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart_outline);
-        }
-
-        Picasso.with(getApplicationContext())
-                .load(doctorCard.getImageURL())
-                .placeholder(R.drawable.doctor_placeholder)
-                .error(R.drawable.doctor_placeholder)
-                .transform(new CircularTransformation())
-                .into((ImageView) findViewById(R.id.docImage));
-
-        ((TextView) findViewById(R.id.docNameAndTitle)).setText(this.doctorCard.getNameAndTitle());
-        ((TextView) findViewById(R.id.docSpeciality)).setText(this.doctorCard.getSpeciality());
-        ((TextView) findViewById(R.id.docAddrLine)).setText(this.doctorCard.getAddress1() + ", " + this.doctorCard.getAddress2());
     }
 
     private void setProfile() {

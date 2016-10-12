@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jellsoft.mobile.docfin.R;
@@ -19,6 +20,8 @@ import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.realm.User;
 import com.jellsoft.mobile.docfin.model.realm.UserSession;
+import com.jellsoft.mobile.docfin.transform.CircularTransformation;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +50,24 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    protected void setDocHeader(DoctorCard doctorCard) {
+        if (doctorCard.isFavorite()) {
+            ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart);
+        } else {
+            ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart_outline);
+        }
+
+        Picasso.with(getApplicationContext())
+                .load(doctorCard.getImageURL())
+                .placeholder(R.drawable.doctor_placeholder)
+                .error(R.drawable.doctor_placeholder)
+                .transform(new CircularTransformation())
+                .into((ImageView) findViewById(R.id.docImage));
+
+        ((TextView) findViewById(R.id.docNameAndTitle)).setText(doctorCard.getNameAndTitle());
+        ((TextView) findViewById(R.id.docSpeciality)).setText(doctorCard.getSpeciality());
+        ((TextView) findViewById(R.id.docAddrLine)).setText(doctorCard.getAddress1() + ", " + doctorCard.getAddress2());
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

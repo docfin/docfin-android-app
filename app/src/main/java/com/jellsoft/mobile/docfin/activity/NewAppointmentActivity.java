@@ -35,6 +35,8 @@ public class NewAppointmentActivity extends BaseDocfinActivity {
         this.doctorCard = (DoctorCard) intent.getSerializableExtra(IntentConstants.BOOK_APPOINTMENT_DOCTOR_CARD);
         this.appointmentTime = (DoctorProfileAndCalendar.Day.Slot) intent.getSerializableExtra(IntentConstants.BOOK_APPOINTMENT_TIME);
 
+        this.setDocHeader(this.doctorCard);
+
         TextView appointmentTimeView = (TextView) findViewById(R.id.appointmentTime);
         appointmentTimeView.setText(appointmentTime.toString() + " on " + sdf.format(appointmentTime.getDay().date));
 
@@ -44,7 +46,6 @@ public class NewAppointmentActivity extends BaseDocfinActivity {
             User user = session.getUser();
             me.setText(user.getFirstName() + " " + user.getLastName());
         }
-
     }
 
     public void choosePatient(View view)
