@@ -36,20 +36,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/appointmentTimeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="At: "
-                    android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/appointmentTime"
@@ -75,34 +75,94 @@
                     android:id="@+id/consultationReason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Reason for the consultation"
-                    />
+                    android:hint="Reason for the consultation" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Appointment is for:"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:text="Appointment is for:" />
 
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:orientation="vertical">
-                    <RadioButton android:id="@+id/appointmentForSelf"
+
+                    <RadioButton
+                        android:id="@+id/appointmentForSelf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Me"
-                        android:onClick="choosePatient"
                         android:layout_marginTop="5dp"
-                        android:checked="true"/>
-                    <RadioButton android:id="@+id/appointmentForNewPatient"
+                        android:checked="true"
+                        android:onClick="choosePatient"
+                        android:text="Me" />
+
+                    <RadioButton
+                        android:id="@+id/appointmentForNewPatient"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add New Patient"
-                        android:onClick="choosePatient"/>
+                        android:onClick="choosePatient"
+                        android:text="Add New Patient" />
                 </RadioGroup>
 
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:rowCount="2"
+                    android:columnCount="2">
+                    <TextView
+                        android:id="@+id/phoneLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Phone:"
+                        android:textSize="14sp"
+                        android:layout_gravity="clip_vertical"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"/>
+
+                    <EditText
+                        android:id="@+id/phoneNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_toEndOf="@+id/phoneLabel"
+                        android:layout_toRightOf="@+id/phoneLabel"
+                        android:inputType="phone"
+                        android:text="732-429-6755"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="10dp"/>
+                    <TextView
+                        android:id="@+id/insuranceLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Insurance:"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/insurance"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Cigna, PPO"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="14sp" />
+                </GridLayout>
+
+                <Button
+                    android:id="@+id/bookAppointment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:onClick="registerUser"
+                    android:text="Book Appointment"
+                    android:background="@drawable/button_layout_rounded"
+                    android:textColor="@color/white"
+                    />
             </LinearLayout>
+
 
 
         </LinearLayout>
