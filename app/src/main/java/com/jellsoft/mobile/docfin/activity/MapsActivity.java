@@ -20,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -43,7 +44,7 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        ((TextView)findViewById(R.id.toolbar_sr_title)).setText("Map View");
+        ((TextView) findViewById(R.id.toolbar_sr_title)).setText("Map View");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -90,7 +91,7 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
         mMap = googleMap;
 
         Log.d("MapsActivity", "mapReady");
-
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         final LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (DoctorCard address : this.addresses) {
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
@@ -98,15 +99,28 @@ public class MapsActivity extends BaseDocfinActivity implements OnMapReadyCallba
             mMap.addMarker(markerOptions.title(address.getNameAndTitle()));
             builder.include(latLng);
         }
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                LatLngBounds bounds = builder.build();
-                int padding = 50;
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                mMap.animateCamera(cu);
-            }
-        });
+        if (this.addresses.size() == 1) {
+            //mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            DoctorCard address = addresses.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng)
+                    .zoom(16f)
+                    .bearing(300)
+                    .tilt(25)
+                    .build();
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        } else {
+            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    LatLngBounds bounds = builder.build();
+                    int padding = 50;
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    mMap.animateCamera(cu);
+                }
+            });
+        }
 
     }
 

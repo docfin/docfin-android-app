@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import org.apmem.tools.layouts.FlowLayout;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -103,6 +104,9 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
         mAdapter = new AppointmentCalendarRecyclerViewAdapter(this.profileAndCalendar.getCalendar());
         mRecyclerView.setAdapter(mAdapter);
 
+        ArrayList<DoctorCard> doctorCards = new ArrayList<>();
+        doctorCards.add(doctorCard);
+        this.addToolbarMapEventListener(doctorCards);
     }
 
     private void setProfile() {
