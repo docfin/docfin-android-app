@@ -3,7 +3,7 @@
     <string name="user.firstName">First Name</string>
     <string name="user.lastName">Last Name</string>
     <string name="user.email">Email</string>
-    <string name="user.insurance">Insurance</string>
+    <string name="user.insurance">Primary Insurance</string>
 
 
     <string name="user.firstName.error">Please enter the first name</string>
@@ -55,4 +55,7 @@
     <!-- Content Description for images -->
     <string name="desc_google_icon">Google Logo</string>
     <string name="server_client_id">360386953099-lepb0svunt4vpl3vs1r8c6sqn7jha91t.apps.googleusercontent.com</string>
+    <string name="user.dental.insurance">Dental Insurance (Optional)</string>
+    <string name="user.vision.insurance">Vision Insurance (Optional)</string>
+    <string name="user.dob">Date of birth</string>
 </resources>

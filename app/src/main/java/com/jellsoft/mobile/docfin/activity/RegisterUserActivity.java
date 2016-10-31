@@ -2,12 +2,14 @@ package com.jellsoft.mobile.docfin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jellsoft.mobile.docfin.R;
+import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
@@ -102,6 +104,14 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         ((EditText) findViewById(R.id.lastName)).setError(null);
         ((EditText) findViewById(R.id.emailId)).setError(null);
         ((EditText) findViewById(R.id.insuranceId)).setError(null);
+    }
+
+    public void selectDOB(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(DatePickerFragment.TYPE_KEY, DatePickerFragment.DatePickerType.DOB);
+        newFragment.setArguments(args);
+        newFragment.show(getFragmentManager(), "DOBDatePicker");
     }
 
     public void selectInsurance(View selectInsurance) {

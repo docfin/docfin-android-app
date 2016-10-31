@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:id="@+id/user_profile">
+    <EditText
+        android:id="@+id/firstName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:fontFamily="Arial"
+        android:hint="@string/user.firstName"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/lastName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:hint="@string/user.lastName"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/emailId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:hint="@string/user.email"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+
+        />
+
+    <EditText
+        android:id="@+id/dob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:hint="@string/user.dob"
+        android:imeOptions="actionNone"
+        android:inputType="none"
+        android:singleLine="true"
+        android:onClick="selectDOB"
+        />
+
+
+    <EditText
+        android:id="@+id/insuranceId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/user.insurance"
+        android:imeOptions="actionNext"
+        android:onClick="selectInsurance"
+        android:singleLine="true"
+        android:textIsSelectable="true" />
+
+    <EditText
+        android:id="@+id/dentalInsuranceId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/user.dental.insurance"
+        android:imeOptions="actionNext"
+        android:onClick="selectInsurance"
+        android:singleLine="true"
+        android:textIsSelectable="true" />
+
+    <EditText
+        android:id="@+id/visionInsuranceId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/user.vision.insurance"
+        android:imeOptions="actionNext"
+        android:onClick="selectInsurance"
+        android:singleLine="true"
+        android:textIsSelectable="true" />
+
+
+</LinearLayout>

@@ -2,12 +2,12 @@ package com.jellsoft.mobile.docfin.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -192,7 +192,7 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "docSearchDatePicker");
+        newFragment.show(getFragmentManager(), "docSearchDatePicker");
     }
 
     @Override

@@ -11,14 +11,14 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:background="@color/colorToolbar"
         android:gravity="center|fill_vertical"
         android:singleLine="false"
         android:text="@string/welcome_msg"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <ScrollView
@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/activity_vertical_large_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -38,15 +38,9 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/textView2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignStart="@+id/textView2"
-                android:layout_below="@+id/textView2"
                 android:text="@string/tag_line"
-                android:textAlignment="center"
                 android:textStyle="italic"
-                android:gravity="center|fill_horizontal"
+                android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -59,69 +53,9 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <EditText
-                android:id="@+id/firstName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignEnd="@+id/textView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/textView"
-                android:layout_below="@+id/textView3"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:fontFamily="Arial"
-                android:hint="@string/user.firstName"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
-
-            <EditText
-                android:id="@+id/lastName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignEnd="@+id/firstName"
-                android:layout_alignLeft="@+id/firstName"
-                android:layout_alignRight="@+id/firstName"
-                android:layout_alignStart="@+id/firstName"
-                android:layout_below="@+id/firstName"
-                android:ems="10"
-                android:hint="@string/user.lastName"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
-
-            <EditText
-                android:id="@+id/emailId"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignEnd="@+id/lastName"
-                android:layout_alignLeft="@+id/lastName"
-                android:layout_alignRight="@+id/lastName"
-                android:layout_alignStart="@+id/lastName"
-                android:layout_below="@+id/lastName"
-                android:ems="10"
-                android:hint="@string/user.email"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-
+            <include layout="@layout/user_profile_fragment" android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 />
-
-            <EditText
-                android:id="@+id/insuranceId"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignEnd="@+id/emailId"
-                android:layout_alignLeft="@+id/emailId"
-                android:layout_alignRight="@+id/emailId"
-                android:layout_alignStart="@+id/emailId"
-                android:layout_below="@+id/emailId"
-                android:hint="@string/user.insurance"
-                android:imeOptions="actionNext"
-                android:onClick="selectInsurance"
-                android:singleLine="true"
-                android:textIsSelectable="true" />
 
             <Button
                 android:id="@+id/saveButton"
