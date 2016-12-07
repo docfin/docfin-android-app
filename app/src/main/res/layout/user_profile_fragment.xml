@@ -33,7 +33,6 @@
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:singleLine="true"
-
         />
 
     <EditText
@@ -43,11 +42,11 @@
         android:ems="10"
         android:hint="@string/user.dob"
         android:imeOptions="actionNone"
-        android:inputType="none"
+        android:inputType="date"
         android:singleLine="true"
         android:onClick="selectDOB"
+        android:textIsSelectable="true"
         />
-
 
     <EditText
         android:id="@+id/insuranceId"
@@ -78,6 +77,5 @@
         android:onClick="selectInsurance"
         android:singleLine="true"
         android:textIsSelectable="true" />
-
 
 </LinearLayout>

@@ -13,11 +13,12 @@
     <string name="tag_line">Finding doctors made easy!</string>
     <string name="registerUser">Sign Up</string>
     <string name="welcome_msg">Welcome to Docfin</string>
-    <string name="register_msg">Before we get started:</string>
+    <string name="register_msg">We need a few details:</string>
     <string name="selDocSpeciality">Select Speciality</string>
     <string name="pick_date">Appoinment Date</string>
 
     <string name="dateFormat">EEE, MMM d</string>
+    <string name="dateFormatDOB">dd/MM/yyyy</string>
 
     <string name="google_loc_autosuggest">https://maps.googleapis.com/maps/api/place/autocomplete/json</string>
     <string name="google_apiKey">AIzaSyC7PpL7lg8LT0LbAgKsqF59Pp-8cWRiUzQ</string>

@@ -35,23 +35,13 @@
             >
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/tag_line"
-                android:textStyle="italic"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/textView"
-                android:layout_marginTop="40dp"
                 android:text="@string/register_msg"
                 android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <include layout="@layout/user_profile_fragment" android:layout_width="match_parent"
                 android:layout_height="wrap_content"

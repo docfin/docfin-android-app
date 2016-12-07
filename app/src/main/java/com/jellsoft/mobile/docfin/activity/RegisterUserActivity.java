@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,7 +18,9 @@ import com.jellsoft.mobile.docfin.model.realm.User;
 import com.jellsoft.mobile.docfin.service.MockUserRegistrationService;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
-public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener {
+import java.util.Date;
+
+public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener, OnDateSelectedListener {
 
     private EditText firstName;
     private EditText lastName;
@@ -179,5 +182,11 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         if (view instanceof EditText) {
             ((EditText) view).setError(null);
         }
+    }
+
+    @Override
+    public void onDateSelected(Date date) {
+        EditText dateButton = (EditText) findViewById(R.id.dob);
+        dateButton.setText(new com.jellsoft.mobile.docfin.model.Date(getString(R.string.dateFormatDOB), date).toString());
     }
 }

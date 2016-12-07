@@ -56,6 +56,7 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_search);
+        sdf = new SimpleDateFormat(getResources().getString(R.string.dateFormat));
         findViewById(R.id.toolbar_main_menu).setOnClickListener(new PopupMenuManager());
         ((TextView) findViewById(R.id.toolbar_screen_title)).setText("Doctor Search");
 
@@ -63,7 +64,6 @@ public class DoctorSearchActivity extends BaseDocfinActivity implements OnDateSe
         ((CheckBox) findViewById(R.id.docSearchInNetwork)).setChecked(true);
 
         populateDoctorSpecialities();
-        sdf = new SimpleDateFormat(getResources().getString(R.string.dateFormat));
 
         Button dateButton = (Button) findViewById(R.id.docSearchDateButton);
         dateButton.setText(sdf.format(Calendar.getInstance().getTime()));
