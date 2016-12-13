@@ -18,7 +18,8 @@ import android.widget.Toast;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
-import com.jellsoft.mobile.docfin.model.realm.User;
+import com.jellsoft.mobile.docfin.model.User;
+import com.jellsoft.mobile.docfin.model.realm.RealmUser;
 import com.jellsoft.mobile.docfin.model.realm.UserSession;
 import com.jellsoft.mobile.docfin.transform.CircularTransformation;
 import com.squareup.picasso.Picasso;
@@ -109,40 +110,45 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         });
     }
 
-    protected User registerUserDetails(String email, final String firstName, final String lastName, final String insuranceProvider, final String insurancePlan) {
+    protected RealmUser registerUserDetails(final User user) {
 
-        RealmResults<User> users = this.findExistingUsers(email);
+        RealmResults<RealmUser> users = this.findExistingUsers(user.getEmail());
         if (users.size() == 1) {
-            final User user = users.get(0);
+            final RealmUser realmUser = users.get(0);
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
                     try {
-                        user.setFirstName(firstName);
-                        user.setLastName(lastName);
-                        user.setInsuranceProvider(insuranceProvider);
-                        user.setInsurancePlan(insurancePlan);
-                        user.setRegistered(true);
+                        realmUser.setFirstName(user.getFirstName());
+                        realmUser.setLastName(user.getLastName());
+                        realmUser.setDob(user.getDateOfBirth());
+                        realmUser.setInsuranceProvider(user.getInsuranceProvider());
+                        realmUser.setDentalInsuranceProvider(user.getDentalInsuranceProvider());
+                        realmUser.setVisionInsuranceProvider(user.getVisionInsuranceProvider());
+                        realmUser.setInsurancePlan(user.getInsurancePlan());
+                        realmUser.setDentalInsurancePlan(user.getDentalInsurancePlan());
+                        realmUser.setVisionInsurancePlan(user.getVisionInsurancePlan());
+                        realmUser.setRegistered(true);
                     } catch (Exception e) {
-                        handleReamlException(e, user);
+                        handleRealmException(e, realmUser);
                         throw e;
                     }
                 }
             });
-            return user;
+            return realmUser;
         }
         return null;
     }
 
     @NonNull
-    protected User createNewUser(String email) {
-        CopyToRealmTransaction<User> transaction = new CopyToRealmTransaction<>(new User(email));
+    protected RealmUser createNewUser(String email) {
+        CopyToRealmTransaction<RealmUser> transaction = new CopyToRealmTransaction<>(new RealmUser(email));
         realm.executeTransaction(transaction);
         return transaction.getObj();
     }
 
-    protected RealmResults<User> findExistingUsers(String email) {
-        return realm.where(User.class).equalTo("email", email).findAll();
+    protected RealmResults<RealmUser> findExistingUsers(String email) {
+        return realm.where(RealmUser.class).equalTo("email", email).findAll();
     }
 
     protected UserSession userSession() {
@@ -153,7 +159,7 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         return null;
     }
 
-    protected UserSession createNewSession(final User user) {
+    protected UserSession createNewSession(final RealmUser user) {
         CopyToRealmTransaction<UserSession> transaction = new CopyToRealmTransaction<>(new UserSession(user, new Date()));
         realm.executeTransaction(transaction);
         return transaction.getObj();
@@ -189,7 +195,7 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
             try {
                 this.obj = realm.copyToRealm(this.obj);
             } catch (Exception e) {
-                handleReamlException(e, this.obj);
+                handleRealmException(e, this.obj);
                 this.obj = null;
                 throw e;
             }
@@ -201,7 +207,7 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         }
     }
 
-    private void handleReamlException(Exception e, RealmObject obj) {
+    private void handleRealmException(Exception e, RealmObject obj) {
         Log.e("ReamlTransaction", "Error saving " + obj, e);
         Toast.makeText(getApplicationContext(), "Oops.. Something went wrong. Try again.", Toast.LENGTH_SHORT);
     }

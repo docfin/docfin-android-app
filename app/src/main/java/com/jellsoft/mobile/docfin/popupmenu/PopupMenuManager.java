@@ -11,7 +11,7 @@ import com.jellsoft.mobile.docfin.activity.DoctorSearchActivity;
 import com.jellsoft.mobile.docfin.activity.RegisterUserActivity;
 import com.jellsoft.mobile.docfin.activity.SignInActivity;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
-import com.jellsoft.mobile.docfin.model.realm.User;
+import com.jellsoft.mobile.docfin.model.realm.RealmUser;
 import com.jellsoft.mobile.docfin.model.realm.UserSession;
 
 import io.realm.Realm;
@@ -71,11 +71,11 @@ public class PopupMenuManager implements View.OnClickListener {
     private void startUserRegistrationActivity(View view) {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<UserSession> sessions = realm.where(UserSession.class).findAll();
-        if(sessions.size() ==1)
+        if(sessions.size() == 1)
         {
             UserSession session = sessions.get(0);
             Intent userRegistration = new Intent(view.getContext(), RegisterUserActivity.class);
-            User user = session.getUser();
+            RealmUser user = session.getUser();
             userRegistration.putExtra(IntentConstants.SIGN_IN_ACCOUNT, new com.jellsoft.mobile.docfin.model.User(user));
             view.getContext().startActivity(userRegistration);
         }else

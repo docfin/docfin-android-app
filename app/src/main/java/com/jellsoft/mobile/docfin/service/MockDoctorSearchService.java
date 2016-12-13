@@ -1,5 +1,6 @@
 package com.jellsoft.mobile.docfin.service;
 
+import com.jellsoft.mobile.docfin.model.DocfinDate;
 import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.DoctorProfileAndCalendar;
 
@@ -66,7 +67,7 @@ public class MockDoctorSearchService implements DoctorSearchService {
 
         for (int j = 0; j < 7; j++) {
             calendar.add(Calendar.DAY_OF_MONTH, j);
-            DoctorProfileAndCalendar.Day day = new DoctorProfileAndCalendar.Day(new com.jellsoft.mobile.docfin.model.Date(calendar.getTime()));
+            DoctorProfileAndCalendar.Day day = new DoctorProfileAndCalendar.Day(new DocfinDate(calendar.getTime()));
             for (int i = 9; i < 19; i++) {
                 day.addSlot(new DoctorProfileAndCalendar.Day.Slot(day, i, 0));
             }

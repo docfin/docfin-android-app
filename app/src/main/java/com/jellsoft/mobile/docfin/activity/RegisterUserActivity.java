@@ -1,20 +1,21 @@
 package com.jellsoft.mobile.docfin.activity;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
+import com.jellsoft.mobile.docfin.model.DateFormatter;
 import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
+import com.jellsoft.mobile.docfin.model.User;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
-import com.jellsoft.mobile.docfin.model.realm.User;
+import com.jellsoft.mobile.docfin.model.realm.RealmUser;
 import com.jellsoft.mobile.docfin.service.MockUserRegistrationService;
 import com.jellsoft.mobile.docfin.util.ValidateInput;
 
@@ -24,8 +25,13 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
 
     private EditText firstName;
     private EditText lastName;
+    private EditText dateOfBirth;
     private EditText emailId;
     private EditText insuranceId;
+    private EditText dentalInsuranceId;
+    private EditText visionInsuranceId;
+
+    DateFormatter dobDateFormatter;
 
     private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
 
@@ -45,12 +51,16 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.firstName = (EditText) findViewById(R.id.firstName);
         this.lastName = (EditText) findViewById(R.id.lastName);
         this.emailId = (EditText) findViewById(R.id.emailId);
+        this.dateOfBirth = (EditText) findViewById(R.id.dob);
+        this.dentalInsuranceId = (EditText) findViewById(R.id.dentalInsuranceId);
+        this.visionInsuranceId = (EditText) findViewById(R.id.visionInsuranceId);
 
         this.firstName.requestFocus();
 
         this.firstName.setOnClickListener(this);
         this.lastName.setOnClickListener(this);
         this.emailId.setOnClickListener(this);
+        this.dobDateFormatter = DateFormatter.withFormat(getString(R.string.dateFormatDOB));
 
         Intent intent = getIntent();
 
@@ -59,9 +69,30 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
             this.firstName.setText(userAccount.getFirstName());
             this.lastName.setText(userAccount.getLastName());
             this.emailId.setText(userAccount.getEmail());
-            if (userAccount.getInsuranceProvider() != null && userAccount.getInsurancePlan() != null) {
-                this.insuranceId.setText(userAccount.getInsuranceProvider() + ", " + userAccount.getInsurancePlan());
-            }
+
+            if(userAccount.getDateOfBirth()!= null)
+                this.dateOfBirth.setText(dobDateFormatter.toString(userAccount.getDateOfBirth()));
+            this.hydrateInsurance(userAccount);
+            this.hydrateDentalInsurance(userAccount);
+            this.hydrateVisionInsurance(userAccount);
+        }
+    }
+
+    private void hydrateInsurance(User userAccount) {
+        if (userAccount.getInsuranceProvider() != null && userAccount.getInsurancePlan() != null) {
+            this.insuranceId.setText(userAccount.getInsuranceProvider() + ", " + userAccount.getInsurancePlan());
+        }
+    }
+
+    private void hydrateDentalInsurance(User userAccount) {
+        if (userAccount.getDentalInsuranceProvider() != null && userAccount.getDentalInsurancePlan() != null) {
+            this.insuranceId.setText(userAccount.getDentalInsuranceProvider() + ", " + userAccount.getDentalInsurancePlan());
+        }
+    }
+
+    private void hydrateVisionInsurance(User userAccount) {
+        if (userAccount.getInsuranceProvider() != null && userAccount.getInsurancePlan() != null) {
+            this.insuranceId.setText(userAccount.getVisionInsuranceProvider() + ", " + userAccount.getVisionInsurancePlan());
         }
     }
 
@@ -71,22 +102,38 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
         this.clearErrorMessages();
         validateUserRegistrationFields();
         if (errorMessages.hasNoErrors()) {
-            String[] insurance = insuranceId.getText().toString().split(",");
-            String provider;
-            String plan;
-            if (insurance.length > 1) {
-                provider = insurance[0];
-                plan = insurance[1];
-            } else {
-                provider = "Self";
-                plan = "Cash";
-            }
-            User user = registerUserDetails(emailId.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), provider, plan);
+
+            User user = createUser();
+            RealmUser registeredUser = registerUserDetails(user);
             //TODO register on server.
-            if (user != null) {
+            if (registeredUser != null) {
                 new MockUserRegistrationService().registerUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getInsuranceProvider(), user.getInsurancePlan());
                 doOnRegistrationSuccess();
             }
+        }
+    }
+
+    private User createUser() {
+        User user = new User(this.emailId.getText().toString(), this.firstName.getText().toString(), this.lastName.getText().toString());
+
+        user.setDateOfBirth(dobDateFormatter.toDate(this.dateOfBirth.getText().toString()));
+        user.setInsuranceProvider(getProviderAndPlan(this.insuranceId)[0]);
+        user.setInsuranceProvider(getProviderAndPlan(this.insuranceId)[1]);
+
+        user.setDentalInsuranceProvider(getProviderAndPlan(this.dentalInsuranceId)[0]);
+        user.setDentalInsurancePlan(getProviderAndPlan(this.dentalInsuranceId)[1]);
+
+        user.setVisionInsuranceProvider(getProviderAndPlan(this.visionInsuranceId)[0]);
+        user.setVisionInsurancePlan(getProviderAndPlan(this.visionInsuranceId)[1]);
+        return user;
+    }
+
+    private String[] getProviderAndPlan(EditText typeOfInsurance) {
+        if (typeOfInsurance.getText() != null && !typeOfInsurance.getText().toString().isEmpty()) {
+            String insuranceStr = typeOfInsurance.getText().toString();
+            return insuranceStr.split(",");
+        } else {
+            return new String[]{"Self", "Cash"};
         }
     }
 
@@ -104,9 +151,10 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
     private void clearErrorMessages() {
         this.errorMessages.reset();
         this.firstName.setError(null);
-        ((EditText) findViewById(R.id.lastName)).setError(null);
-        ((EditText) findViewById(R.id.emailId)).setError(null);
-        ((EditText) findViewById(R.id.insuranceId)).setError(null);
+        this.lastName.setError(null);
+        this.emailId.setError(null);
+        this.dateOfBirth.setError(null);
+        this.insuranceId.setError(null);
     }
 
     public void selectDOB(View v) {
@@ -142,6 +190,7 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
     private void validateUserRegistrationFields() {
         validateEditText((EditText) findViewById(R.id.firstName));
         validateEditText((EditText) findViewById(R.id.lastName));
+        validateEditText((EditText) findViewById(R.id.dob));
         EditText email = (EditText) findViewById(R.id.emailId);
         validateEditText(email);
         validateEditText((EditText) findViewById(R.id.insuranceId));
@@ -187,6 +236,6 @@ public class RegisterUserActivity extends BaseDocfinActivity implements View.OnC
     @Override
     public void onDateSelected(Date date) {
         EditText dateButton = (EditText) findViewById(R.id.dob);
-        dateButton.setText(new com.jellsoft.mobile.docfin.model.Date(getString(R.string.dateFormatDOB), date).toString());
+        dateButton.setText(dobDateFormatter.toString(date));
     }
 }

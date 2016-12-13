@@ -38,11 +38,11 @@ public class DoctorProfileAndCalendar {
     }
 
     public static class Day implements Serializable {
-        public final Date date;
+        public final DocfinDate date;
 
         private List<Slot> slots = new ArrayList<>();
 
-        public Day(Date day) {
+        public Day(DocfinDate day) {
             this.date = day;
         }
 

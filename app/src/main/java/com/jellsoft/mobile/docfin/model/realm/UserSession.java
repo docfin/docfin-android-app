@@ -10,12 +10,12 @@ import io.realm.annotations.Required;
  */
 public class UserSession extends RealmObject {
 
-    private User user;
+    private RealmUser user;
 
     @Required
     private Date loggedInTime;
 
-    public UserSession(User user, Date loggedInTime) {
+    public UserSession(RealmUser user, Date loggedInTime) {
         this.user = user;
         this.loggedInTime = loggedInTime;
     }
@@ -23,11 +23,11 @@ public class UserSession extends RealmObject {
     public UserSession() {
     }
 
-    public User getUser() {
+    public RealmUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(RealmUser user) {
         this.user = user;
     }
 

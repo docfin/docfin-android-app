@@ -1,5 +1,7 @@
 package com.jellsoft.mobile.docfin.model.realm;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -7,11 +9,13 @@ import io.realm.annotations.Required;
 /**
  * Created by atulanand on 9/21/16.
  */
-public class User extends RealmObject {
+public class RealmUser extends RealmObject {
 
     private String firstName;
 
     private String lastName;
+
+    private Date dob;
 
     @PrimaryKey
     private String email;
@@ -20,13 +24,21 @@ public class User extends RealmObject {
 
     private String insurancePlan;
 
+    private String dentalInsuranceProvider;
+
+    private String dentalInsurancePlan;
+
+    private String visionInsuranceProvider;
+
+    private String visionInsurancePlan;
+
     private boolean registered;
 
 
-    public User() {
+    public RealmUser() {
     }
 
-    public User(String email) {
+    public RealmUser(String email) {
         this.email = email;
     }
 
@@ -68,6 +80,46 @@ public class User extends RealmObject {
 
     public void setInsurancePlan(String insurancePlan) {
         this.insurancePlan = insurancePlan;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getDentalInsuranceProvider() {
+        return dentalInsuranceProvider;
+    }
+
+    public void setDentalInsuranceProvider(String dentalInsuranceProvider) {
+        this.dentalInsuranceProvider = dentalInsuranceProvider;
+    }
+
+    public String getDentalInsurancePlan() {
+        return dentalInsurancePlan;
+    }
+
+    public void setDentalInsurancePlan(String dentalInsurancePlan) {
+        this.dentalInsurancePlan = dentalInsurancePlan;
+    }
+
+    public String getVisionInsuranceProvider() {
+        return visionInsuranceProvider;
+    }
+
+    public void setVisionInsuranceProvider(String visionInsuranceProvider) {
+        this.visionInsuranceProvider = visionInsuranceProvider;
+    }
+
+    public String getVisionInsurancePlan() {
+        return visionInsurancePlan;
+    }
+
+    public void setVisionInsurancePlan(String visionInsurancePlan) {
+        this.visionInsurancePlan = visionInsurancePlan;
     }
 
     public boolean isRegistered() {

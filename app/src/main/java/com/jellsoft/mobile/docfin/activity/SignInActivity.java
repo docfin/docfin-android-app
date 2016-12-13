@@ -20,7 +20,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
-import com.jellsoft.mobile.docfin.model.realm.User;
+import com.jellsoft.mobile.docfin.model.realm.RealmUser;
 
 import io.realm.RealmResults;
 
@@ -183,18 +183,18 @@ public class SignInActivity extends BaseDocfinActivity implements
 
     private void doOnSignedIn(GoogleSignInResult result) {
         this.removeUserSession();
-        RealmResults<User> users = findExistingUsers(result.getSignInAccount().getEmail());
+        RealmResults<RealmUser> users = findExistingUsers(result.getSignInAccount().getEmail());
         if (users.size() == 1) {
             if (users.get(0).isRegistered()) {
                 this.startDoctorSearchActivity();
                 this.createNewSession(users.get(0));
             } else {
-                User user = users.get(0);
+                RealmUser user = users.get(0);
                 this.createNewSession(user);
                 startUserRegistrationActivity(result);
             }
         } else {
-            User user = this.createNewUser(result.getSignInAccount().getEmail());
+            RealmUser user = this.createNewUser(result.getSignInAccount().getEmail());
             this.createNewSession(user);
             startUserRegistrationActivity(result);
         }
