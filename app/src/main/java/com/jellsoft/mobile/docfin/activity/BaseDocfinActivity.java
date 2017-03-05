@@ -51,6 +51,11 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    protected void startAddNewDependantActivity() {
+        Intent intent = new Intent(getApplicationContext(), AddNewDependantActivity.class);
+        startActivity(intent);
+    }
+
     protected void setDocHeader(DoctorCard doctorCard) {
         if (doctorCard.isFavorite()) {
             ((ImageView) findViewById(R.id.docIsFavoriteStatus)).setImageResource(R.drawable.ic_action_heart);

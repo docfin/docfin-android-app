@@ -60,4 +60,7 @@
     <string name="user.dental.insurance">Dental Insurance (Optional)</string>
     <string name="user.vision.insurance">Vision Insurance (Optional)</string>
     <string name="user.dob">Date of birth</string>
+    <string name="add_new_patient_text">Add New Patient</string>
+    <string name="male_label">Male</string>
+    <string name="female_label">Female</string>
 </resources>

@@ -46,6 +46,7 @@ public class NewAppointmentActivity extends BaseDocfinActivity {
         }
     }
 
+    //TODO: implement this method...
     public void choosePatient(View view)
     {
         boolean checked = ((RadioButton) view).isChecked();
@@ -55,7 +56,10 @@ public class NewAppointmentActivity extends BaseDocfinActivity {
                     break;
             case R.id.appointmentForNewPatient:
                 if (checked)
+                    startAddNewDependantActivity();
                     break;
         }
     }
+
+
 }

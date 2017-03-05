@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +22,6 @@ import com.jellsoft.mobile.docfin.model.DoctorCard;
 import com.jellsoft.mobile.docfin.model.DoctorProfileAndCalendar;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.service.MockDoctorSearchService;
-import com.jellsoft.mobile.docfin.transform.CircularTransformation;
-import com.squareup.picasso.Picasso;
 
 import org.apmem.tools.layouts.FlowLayout;
 
@@ -32,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookAppointmentActivity extends BaseDocfinActivity {
+public class ShowSelectedDoctorCalendarAndProfile extends BaseDocfinActivity {
 
     private DoctorCard doctorCard;
     private DoctorProfileAndCalendar profileAndCalendar;
@@ -44,7 +41,7 @@ public class BookAppointmentActivity extends BaseDocfinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_appointment);
+        setContentView(R.layout.activity_selected_doctor_calendar_profile);
 
         ImageView backLabel = (ImageView) findViewById(R.id.toolbar_back_image);
         backLabel.setOnClickListener(new View.OnClickListener() {

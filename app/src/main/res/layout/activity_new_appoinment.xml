@@ -103,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="choosePatient"
-                        android:text="Add New Patient" />
+                        android:text="@string/add_new_patient_text" />
                 </RadioGroup>
 
                 <GridLayout

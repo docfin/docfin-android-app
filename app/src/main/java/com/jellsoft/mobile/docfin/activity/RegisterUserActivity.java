@@ -21,7 +21,8 @@ import com.jellsoft.mobile.docfin.util.ValidateInput;
 
 import java.util.Date;
 
-public class RegisterUserActivity extends BaseDocfinActivity implements View.OnClickListener, OnDateSelectedListener {
+public class RegisterUserActivity extends BaseDocfinActivity
+        implements View.OnClickListener, OnDateSelectedListener {
 
     private EditText firstName;
     private EditText lastName;
