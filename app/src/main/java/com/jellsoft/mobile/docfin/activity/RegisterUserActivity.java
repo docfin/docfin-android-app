@@ -3,21 +3,19 @@ package com.jellsoft.mobile.docfin.activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jellsoft.mobile.docfin.R;
+import com.jellsoft.mobile.docfin.Validator;
 import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
 import com.jellsoft.mobile.docfin.model.DateFormatter;
-import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.User;
 import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.model.realm.RealmUser;
 import com.jellsoft.mobile.docfin.service.MockUserRegistrationService;
-import com.jellsoft.mobile.docfin.util.ValidateInput;
 
 import java.util.Date;
 
@@ -34,12 +32,12 @@ public class RegisterUserActivity extends BaseDocfinActivity
 
     DateFormatter dobDateFormatter;
 
-    private ValidationErrorMessages errorMessages = new ValidationErrorMessages();
+    private Validator validator;
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        this.clearErrorMessages();
+        this.setUpValidator();
     }
 
     @Override
@@ -55,6 +53,8 @@ public class RegisterUserActivity extends BaseDocfinActivity
         this.dateOfBirth = (EditText) findViewById(R.id.dob);
         this.dentalInsuranceId = (EditText) findViewById(R.id.dentalInsuranceId);
         this.visionInsuranceId = (EditText) findViewById(R.id.visionInsuranceId);
+
+        this.setUpValidator();
 
         this.firstName.requestFocus();
 
@@ -79,6 +79,18 @@ public class RegisterUserActivity extends BaseDocfinActivity
         }
     }
 
+    private void setUpValidator()
+    {
+        this.validator = Validator.withContext(this);
+        this.validator
+                .add(this.firstName, this.getString(R.string.user_firstName_error))
+                .add(this.lastName, this.getString(R.string.user_lastName_error))
+                .add(this.emailId, this.getString(R.string.user_email_error), Validator.EmailValidation.instance)
+                .add(this.insuranceId, this.getString(R.string.user_insurance_error))
+                .add(this.dateOfBirth, this.getString(R.string.user_dob_error))
+               ;
+    }
+
     private void hydrateInsurance(User userAccount) {
         if (userAccount.getInsuranceProvider() != null && userAccount.getInsurancePlan() != null) {
             this.insuranceId.setText(userAccount.getInsuranceProvider() + ", " + userAccount.getInsurancePlan());
@@ -100,10 +112,8 @@ public class RegisterUserActivity extends BaseDocfinActivity
     public void registerUser(View view) {
         //view is the button.
         this.closeKeyboard();
-        this.clearErrorMessages();
-        validateUserRegistrationFields();
-        if (errorMessages.hasNoErrors()) {
-
+        this.validator.validate();
+        if (this.validator.hasNoErrors()) {
             User user = createUser();
             RealmUser registeredUser = registerUserDetails(user);
             //TODO register on server.
@@ -149,15 +159,6 @@ public class RegisterUserActivity extends BaseDocfinActivity
         Toast.makeText(getApplicationContext(), "Yikes, something went wrong with registration. Try again", Toast.LENGTH_LONG).show();
     }
 
-    private void clearErrorMessages() {
-        this.errorMessages.reset();
-        this.firstName.setError(null);
-        this.lastName.setError(null);
-        this.emailId.setError(null);
-        this.dateOfBirth.setError(null);
-        this.insuranceId.setError(null);
-    }
-
     public void selectDOB(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         Bundle args = new Bundle();
@@ -171,60 +172,6 @@ public class RegisterUserActivity extends BaseDocfinActivity
         ((EditText) selectInsurance).setError(null);
         Intent intent = new Intent(getApplicationContext(), SelectInsuranceProviderActivity.class);
         startActivityForResult(intent, IntentConstants.SELECT_INSURANCE_PROVIDER);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IntentConstants.SELECT_INSURANCE_PROVIDER) {
-            if (resultCode == IntentConstants.COMPLETED_WITH_RESULT) {
-                String providerName = data.getStringExtra(IntentConstants.INSURANCE_PROVIDER);
-                String plan = data.getStringExtra(IntentConstants.INSURANCE_PLAN);
-                Insurance.Provider provider = Insurance.provider(providerName);
-                String insuranceText = provider.name + ", " + plan;
-                ((EditText) findViewById(R.id.insuranceId)).setText(insuranceText);
-            }
-        }
-    }
-
-    private void validateUserRegistrationFields() {
-        validateEditText((EditText) findViewById(R.id.firstName));
-        validateEditText((EditText) findViewById(R.id.lastName));
-        validateEditText((EditText) findViewById(R.id.dob));
-        EditText email = (EditText) findViewById(R.id.emailId);
-        validateEditText(email);
-        validateEditText((EditText) findViewById(R.id.insuranceId));
-        if (!ValidateInput.isValidEmail(email.getText().toString())) {
-            showErrorMsg(email, getString(R.string.user_email_error));
-        }
-    }
-
-    private void validateEditText(EditText editText) {
-        if (TextUtils.isEmpty(editText.getText().toString())) {
-            switch (editText.getId()) {
-                case R.id.firstName:
-                    showErrorMsg(editText, getString(R.string.user_firstName_error));
-                    break;
-                case R.id.lastName:
-                    showErrorMsg(editText, getString(R.string.user_lastName_error));
-                    break;
-                case R.id.emailId:
-                    showErrorMsg(editText, getString(R.string.user_email_error));
-                    break;
-                case R.id.insuranceId:
-                    showErrorMsg(editText, getString(R.string.user_insurance_error));
-                    break;
-                default:
-                    break;
-            }
-        }
-
-    }
-
-    private void showErrorMsg(EditText editText, String msg) {
-        editText.setError(msg);
-        this.errorMessages.addErrorMsg(editText.getId(), msg);
     }
 
     @Override

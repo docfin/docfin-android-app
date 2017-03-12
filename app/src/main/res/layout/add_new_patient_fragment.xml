@@ -9,6 +9,8 @@
     <TextView
         android:id="@+id/name_label"
         style="?android:attr/listSeparatorTextViewStyle"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/entry_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -40,6 +42,8 @@
     <TextView
         android:id="@+id/dob_label"
         style="?android:attr/listSeparatorTextViewStyle"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/entry_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -60,6 +64,8 @@
     <TextView
         android:id="@+id/gender_label"
         style="?android:attr/listSeparatorTextViewStyle"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/entry_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -70,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/appointmentForSelf"

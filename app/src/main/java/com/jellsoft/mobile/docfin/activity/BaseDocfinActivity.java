@@ -11,12 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jellsoft.mobile.docfin.R;
 import com.jellsoft.mobile.docfin.model.DoctorCard;
+import com.jellsoft.mobile.docfin.model.Insurance;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.User;
 import com.jellsoft.mobile.docfin.model.realm.RealmUser;
@@ -53,7 +55,7 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
 
     protected void startAddNewDependantActivity() {
         Intent intent = new Intent(getApplicationContext(), AddNewDependantActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, IntentConstants.ADD_NEW_DEPENDANT_AC);
     }
 
     protected void setDocHeader(DoctorCard doctorCard) {
@@ -215,6 +217,26 @@ public abstract class BaseDocfinActivity extends AppCompatActivity {
     private void handleRealmException(Exception e, RealmObject obj) {
         Log.e("ReamlTransaction", "Error saving " + obj, e);
         Toast.makeText(getApplicationContext(), "Oops.. Something went wrong. Try again.", Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,
+                                    int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IntentConstants.SELECT_INSURANCE_PROVIDER) {
+            if (resultCode == IntentConstants.COMPLETED_WITH_RESULT) {
+                String providerName = data.getStringExtra(IntentConstants.INSURANCE_PROVIDER);
+                String plan = data.getStringExtra(IntentConstants.INSURANCE_PLAN);
+                Insurance.Provider provider = Insurance.provider(providerName);
+                String insuranceText = provider.name + ", " + plan;
+                ((EditText) findViewById(R.id.insuranceId)).setText(insuranceText);
+            }
+        }
+        if (requestCode == IntentConstants.ADD_NEW_DEPENDANT_AC) {
+            if (resultCode == IntentConstants.COMPLETED_WITH_RESULT) {
+
+            }
+        }
     }
 
 }
