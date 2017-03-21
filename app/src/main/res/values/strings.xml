@@ -63,4 +63,20 @@
     <string name="add_new_patient_text">Add New Patient</string>
     <string name="male_label">Male</string>
     <string name="female_label">Female</string>
+
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

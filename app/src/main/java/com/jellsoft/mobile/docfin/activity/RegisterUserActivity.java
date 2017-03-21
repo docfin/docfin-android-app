@@ -13,7 +13,6 @@ import com.jellsoft.mobile.docfin.fragment.DatePickerFragment;
 import com.jellsoft.mobile.docfin.model.DateFormatter;
 import com.jellsoft.mobile.docfin.model.IntentConstants;
 import com.jellsoft.mobile.docfin.model.User;
-import com.jellsoft.mobile.docfin.model.ValidationErrorMessages;
 import com.jellsoft.mobile.docfin.model.realm.RealmUser;
 import com.jellsoft.mobile.docfin.service.MockUserRegistrationService;
 

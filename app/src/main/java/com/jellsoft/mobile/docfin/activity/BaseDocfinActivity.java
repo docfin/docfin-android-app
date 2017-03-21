@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,16 @@ import io.realm.RealmResults;
 public abstract class BaseDocfinActivity extends AppCompatActivity {
 
     Realm realm;
+
+    protected void setUpDOBMonths(Spinner months)
+    {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.months, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        months.setAdapter(adapter);
+    }
 
     public void closeKeyboard() {
         View view = this.getCurrentFocus();
